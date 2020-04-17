@@ -64,22 +64,44 @@ class PickupScreen extends StatelessWidget {
                     size: 32,
                   ),
                   color: Colors.green,
-                  onPressed: () async =>
-                      await Permissions.cameraAndMicrophonePermissionsGranted()
-                        ? call.isCall == "video" 
+                  // onPressed: () async =>
+                  //     await Permissions.cameraandmicrophonePermissionsGranted()
+                  //         ? call.isCall == "video"
+                  //             ? Navigator.push(
+                  //                 context,
+                  //                 MaterialPageRoute(
+                  //                   builder: (context) =>
+                  //                       VideoCallScreen(call: call),
+                  //                 ),
+                  //               )
+                  //             : Navigator.push(
+                  //                 context,
+                  //                 MaterialPageRoute(
+                  //                   builder: (context) =>
+                  //                       VoiceCallScreen(call: call),
+                  //                 ),
+                  //               )
+                  //         : {},
+                  onPressed: () async => call.isCall == "video"
+                      ? await Permissions
+                              .cameraandmicrophonePermissionsGranted()
                           ? Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => VideoCallScreen(call: call),
+                                builder: (context) =>
+                                    VideoCallScreen(call: call),
                               ),
                             )
-                          : Navigator.push(
+                          : {}
+                      : await Permissions.microphonePermissionsGranted()
+                          ? Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => VoiceCallScreen(call: call),
+                                builder: (context) =>
+                                    VoiceCallScreen(call: call),
                               ),
                             )
-                        : {},
+                          : {},
                 ),
               ],
             ),

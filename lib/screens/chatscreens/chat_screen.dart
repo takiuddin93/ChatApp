@@ -472,7 +472,7 @@ class _ChatScreenState extends State<ChatScreen> {
             Icons.video_call,
           ),
           onPressed: () async =>
-              await Permissions.cameraAndMicrophonePermissionsGranted()
+              await Permissions.cameraandmicrophonePermissionsGranted()
                   ? CallUtils.dialVideo(
                       from: sender,
                       to: widget.receiver,
@@ -485,7 +485,7 @@ class _ChatScreenState extends State<ChatScreen> {
             Icons.phone,
           ),
           onPressed: () async =>
-              await Permissions.cameraAndMicrophonePermissionsGranted()
+              await Permissions.microphonePermissionsGranted()
                   ? CallUtils.dialVoice(
                       from: sender,
                       to: widget.receiver,
