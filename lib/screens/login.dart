@@ -1,4 +1,4 @@
-import 'package:chatapp/resources/firebase_repository.dart';
+import 'package:chatapp/resources/authentication_methods.dart';
 import 'package:chatapp/screens/dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -9,11 +9,10 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-
-  FirebaseRepository _firebaseRepository = FirebaseRepository();
+  final AuthenticationMethods _authenticationMethods = AuthenticationMethods();
 
   bool isLoginPressed = false;
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,26 +21,23 @@ class _LoginState extends State<Login> {
           Center(
             child: loginButon(),
           ),
-          isLoginPressed 
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : Container()
+          isLoginPressed
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Container()
         ],
       ),
     );
   }
 
   Widget loginButon() {
-    return FlatButton (
+    return FlatButton(
       padding: EdgeInsets.all(32),
-      child: Text (
+      child: Text(
         "Login",
         style: TextStyle(
-          fontSize: 32,
-          fontWeight: FontWeight.w800,
-          letterSpacing: 1.6
-        ),
+            fontSize: 32, fontWeight: FontWeight.w800, letterSpacing: 1.6),
       ),
       onPressed: () => performLogin(),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -55,7 +51,7 @@ class _LoginState extends State<Login> {
       isLoginPressed = true;
     });
 
-    _firebaseRepository.signIn().then((FirebaseUser user) {
+    _authenticationMethods.signIn().then((FirebaseUser user) {
       if (user != null) {
         authenticateUser(user);
       } else {
@@ -65,23 +61,21 @@ class _LoginState extends State<Login> {
   }
 
   void authenticateUser(FirebaseUser user) {
-    _firebaseRepository.authenticateUser(user).then((isNewUser) {
+    _authenticationMethods.authenticateUser(user).then((isNewUser) {
       setState(() {
         isLoginPressed = false;
       });
 
-      if(isNewUser) {
-        _firebaseRepository.addDataToDb(user).then((value) {
+      if (isNewUser) {
+        _authenticationMethods.addDataToDb(user).then((value) {
           Navigator.pop(context);
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (BuildContext context) => Dashboard())
-          );
+              builder: (BuildContext context) => Dashboard()));
         });
       } else {
         Navigator.pop(context);
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (BuildContext context) => Login())
-        );
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (BuildContext context) => Dashboard()));
       }
     });
   }

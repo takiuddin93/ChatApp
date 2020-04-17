@@ -1,12 +1,10 @@
 import 'dart:math';
-
-// import 'package:chatapp/screens/callscreens/audiocall_screen.dart';
-import 'package:chatapp/screens/callscreens/voicecall_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:chatapp/models/call.dart';
 import 'package:chatapp/models/user.dart';
 import 'package:chatapp/resources/call_methods.dart';
 import 'package:chatapp/screens/callscreens/videocall_screen.dart';
+import 'package:chatapp/screens/callscreens/voicecall_screen.dart';
 import 'package:chatapp/utils/utilities.dart';
 
 class CallUtils {
@@ -27,13 +25,12 @@ class CallUtils {
 
     call.hasDialled = true;
 
-
     if (callMade) {
       Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => VideoCallScreen(call: call),
-        ));
+          context,
+          MaterialPageRoute(
+            builder: (context) => VideoCallScreen(call: call),
+          ));
     }
   }
 
@@ -52,13 +49,12 @@ class CallUtils {
 
     call.hasDialled = true;
 
-
     if (callMade) {
       Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => VoiceCallScreen(call: call),
-        ));
+          context,
+          MaterialPageRoute(
+            builder: (context) => VoiceCallScreen(call: call),
+          ));
     }
   }
 }

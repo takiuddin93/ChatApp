@@ -1,4 +1,4 @@
-import 'package:chatapp/resources/firebase_repository.dart';
+import 'package:chatapp/resources/authentication_methods.dart';
 import 'package:chatapp/utils/utilities.dart';
 import 'package:chatapp/widgets/mainappbar.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,7 +13,7 @@ import 'package:chatapp/utils/universal_variables.dart';
 
 import 'pageviews/chat_list_screen.dart';
 
-void main() async{
+void main() async {
   SystemChrome.setEnabledSystemUIOverlays([]);
   runApp(Dashboard());
 }
@@ -48,11 +48,10 @@ class _MyDashboardState extends State<MyDashboard> {
   String currentUserId;
   String initials;
 
-  FirebaseRepository _firebaseRepository = FirebaseRepository();
+  final AuthenticationMethods _authenticationMethods = AuthenticationMethods();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) {
       userProvider = Provider.of<UserProvider>(context, listen: false);
@@ -60,8 +59,8 @@ class _MyDashboardState extends State<MyDashboard> {
     });
 
     pageController = PageController();
-    
-    _firebaseRepository.getCurrentUser().then((user) {
+
+    _authenticationMethods.getCurrentUser().then((user) {
       setState(() {
         currentUserId = user.uid;
         initials = Utils.getInitials(user.displayName);
@@ -81,7 +80,6 @@ class _MyDashboardState extends State<MyDashboard> {
 
   @override
   Widget build(BuildContext context) {
-    
     Size media = MediaQuery.of(context).size;
     double _labelFontSize = 10;
 
@@ -89,7 +87,8 @@ class _MyDashboardState extends State<MyDashboard> {
       scaffold: Scaffold(
         backgroundColor: UniversalVariables.blackColor,
         appBar: PreferredSize(
-          child: MainAppBar(title: widget.title, back: "dashboard", initials: initials),
+          child: MainAppBar(
+              title: widget.title, back: "dashboard", initials: initials),
           preferredSize: Size.fromHeight(media.height),
         ),
         body: PageView(
@@ -98,21 +97,15 @@ class _MyDashboardState extends State<MyDashboard> {
               child: ChatListScreen(),
             ),
             Center(
-              child: Text(
-                "Call Logs",
-                style: TextStyle(
-                  color: Colors.white
-                ),
-              )
-            ),
+                child: Text(
+              "Call Logs",
+              style: TextStyle(color: Colors.white),
+            )),
             Center(
-              child: Text(
-                "Contact Screen",
-                style: TextStyle(
-                  color: Colors.white
-                ),
-              )
-            ),
+                child: Text(
+              "Contact Screen",
+              style: TextStyle(color: Colors.white),
+            )),
           ],
           controller: pageController,
           onPageChanged: onPageChanged,
@@ -126,50 +119,44 @@ class _MyDashboardState extends State<MyDashboard> {
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                   icon: Icon(Icons.chat,
-                    color: (_page == 0)
-                      ? UniversalVariables.lightBlueColor
-                      : UniversalVariables.greyColor
-                  ),
+                      color: (_page == 0)
+                          ? UniversalVariables.lightBlueColor
+                          : UniversalVariables.greyColor),
                   title: Text(
                     "Chats",
                     style: TextStyle(
-                      fontSize: _labelFontSize,
-                      color: (_page == 0)
-                        ? UniversalVariables.lightBlueColor
-                        : Colors.grey
-                    ),
+                        fontSize: _labelFontSize,
+                        color: (_page == 0)
+                            ? UniversalVariables.lightBlueColor
+                            : Colors.grey),
                   ),
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.call,
-                    color: (_page == 1)
-                      ? UniversalVariables.lightBlueColor
-                      : UniversalVariables.greyColor
-                  ),
+                      color: (_page == 1)
+                          ? UniversalVariables.lightBlueColor
+                          : UniversalVariables.greyColor),
                   title: Text(
                     "Calls",
                     style: TextStyle(
-                      fontSize: _labelFontSize,
-                      color: (_page == 1)
-                        ? UniversalVariables.lightBlueColor
-                        : Colors.grey
-                    ),
+                        fontSize: _labelFontSize,
+                        color: (_page == 1)
+                            ? UniversalVariables.lightBlueColor
+                            : Colors.grey),
                   ),
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.contact_phone,
-                    color: (_page == 2)
-                      ? UniversalVariables.lightBlueColor
-                      : UniversalVariables.greyColor
-                  ),
+                      color: (_page == 2)
+                          ? UniversalVariables.lightBlueColor
+                          : UniversalVariables.greyColor),
                   title: Text(
                     "Contacts",
                     style: TextStyle(
-                      fontSize: _labelFontSize,
-                      color: (_page == 2)
-                        ? UniversalVariables.lightBlueColor
-                        : Colors.grey
-                    ),
+                        fontSize: _labelFontSize,
+                        color: (_page == 2)
+                            ? UniversalVariables.lightBlueColor
+                            : Colors.grey),
                   ),
                 ),
               ],

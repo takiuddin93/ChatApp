@@ -12,7 +12,9 @@ import 'package:chatapp/enum/view_state.dart';
 import 'package:chatapp/models/message.dart';
 import 'package:chatapp/models/user.dart';
 import 'package:chatapp/provider/image_upload_provider.dart';
-import 'package:chatapp/resources/firebase_repository.dart';
+import 'package:chatapp/resources/storage_methods.dart';
+import 'package:chatapp/resources/chat_methods.dart';
+import 'package:chatapp/resources/authentication_methods.dart';
 import 'package:chatapp/screens/callscreens/pickup/pickup_layout.dart';
 import 'package:chatapp/screens/chatscreens/widgets/cached_image.dart';
 import 'package:chatapp/utils/call_utilities.dart';
@@ -34,7 +36,9 @@ class _ChatScreenState extends State<ChatScreen> {
   TextEditingController textFieldController = TextEditingController();
   FocusNode textFieldFocus = FocusNode();
 
-  FirebaseRepository _repository = FirebaseRepository();
+  final StorageMethods _storageMethods = StorageMethods();
+  final ChatMethods _chatMethods = ChatMethods();
+  final AuthenticationMethods _authenticationMethods = AuthenticationMethods();
 
   ScrollController _listScrollController = ScrollController();
 
@@ -51,7 +55,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
-    _repository.getCurrentUser().then((user) {
+    _authenticationMethods.getCurrentUser().then((user) {
       _currentUserId = user.uid;
 
       setState(() {
@@ -95,12 +99,12 @@ class _ChatScreenState extends State<ChatScreen> {
               child: messageList(),
             ),
             _imageUploadProvider.getViewState == ViewState.LOADING
-              ? Container(
-                  alignment: Alignment.centerRight,
-                  margin: EdgeInsets.only(right: 15),
-                  child: CircularProgressIndicator(),
-                )
-              : Container(),
+                ? Container(
+                    alignment: Alignment.centerRight,
+                    margin: EdgeInsets.only(right: 15),
+                    child: CircularProgressIndicator(),
+                  )
+                : Container(),
             chatControls(),
             showEmojiPicker ? Container(child: emojiContainer()) : Container(),
           ],
@@ -200,21 +204,21 @@ class _ChatScreenState extends State<ChatScreen> {
 
   getMessage(Message message) {
     return message.type != MESSAGE_TYPE_IMAGE
-      ? Text(
-          message.message,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16.0,
-          ),
-        )
-      : message.photoUrl != null
-        ? CachedImage(
-            message.photoUrl,
-            height: 250,
-            width: 250,
-            radius: 10,
+        ? Text(
+            message.message,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16.0,
+            ),
           )
-        : Text("Url was null");
+        : message.photoUrl != null
+            ? CachedImage(
+                message.photoUrl,
+                height: 250,
+                width: 250,
+                radius: 10,
+              )
+            : Text("Url was null");
   }
 
   Widget receiverLayout(Message message) {
@@ -336,7 +340,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
       textFieldController.text = "";
 
-      _repository.addMessageToDb(_message, sender, widget.receiver);
+      _chatMethods.addMessageToDb(_message, sender, widget.receiver);
     }
 
     return Container(
@@ -441,7 +445,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void pickImage({@required ImageSource source}) async {
     File selectedImage = await Utils.pickImage(source: source);
-    _repository.uploadImage(
+    _storageMethods.uploadImage(
         image: selectedImage,
         receiverId: widget.receiver.uid,
         senderId: _currentUserId,
@@ -468,28 +472,26 @@ class _ChatScreenState extends State<ChatScreen> {
             Icons.video_call,
           ),
           onPressed: () async =>
-            await Permissions.cameraAndMicrophonePermissionsGranted()
-              ? CallUtils.dialVideo(
-                  from: sender,
-                  to: widget.receiver,
-                  context: context,
-                  callis: "video"
-                )
-              : {},
+              await Permissions.cameraAndMicrophonePermissionsGranted()
+                  ? CallUtils.dialVideo(
+                      from: sender,
+                      to: widget.receiver,
+                      context: context,
+                      callis: "video")
+                  : {},
         ),
         IconButton(
           icon: Icon(
             Icons.phone,
           ),
           onPressed: () async =>
-            await Permissions.cameraAndMicrophonePermissionsGranted()
-              ? CallUtils.dialVoice(
-                  from: sender,
-                  to: widget.receiver,
-                  context: context,
-                  callis: "audio"
-                )
-              : {},
+              await Permissions.cameraAndMicrophonePermissionsGranted()
+                  ? CallUtils.dialVoice(
+                      from: sender,
+                      to: widget.receiver,
+                      context: context,
+                      callis: "audio")
+                  : {},
         )
       ],
     );

@@ -1,7 +1,7 @@
 import 'package:chatapp/models/user.dart';
 import 'package:chatapp/screens/chatscreens/chat_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:chatapp/resources/firebase_repository.dart';
+import 'package:chatapp/resources/authentication_methods.dart';
 import 'package:chatapp/screens/callscreens/pickup/pickup_layout.dart';
 import 'package:chatapp/utils/universal_variables.dart';
 import 'package:chatapp/utils/utilities.dart';
@@ -12,8 +12,8 @@ class ChatListScreen extends StatefulWidget {
   _ChatListScreenState createState() => _ChatListScreenState();
 }
 
-//global
-final FirebaseRepository _firebaseRepository = FirebaseRepository();
+// Global
+final AuthenticationMethods _authenticationMethods = AuthenticationMethods();
 List<User> userList;
 bool isUsersFetched = false;
 
@@ -24,8 +24,8 @@ class _ChatListScreenState extends State<ChatListScreen> {
   @override
   void initState() {
     super.initState();
-    _firebaseRepository.getCurrentUser().then((user) {
-      _firebaseRepository.fetchAllUsers(user).then((List<User> list) {
+    _authenticationMethods.getCurrentUser().then((user) {
+      _authenticationMethods.fetchAllUsers(user).then((List<User> list) {
         setState(() {
           userList = list;
         });
@@ -60,46 +60,43 @@ class ChatListContainer extends StatefulWidget {
 }
 
 class _ChatListContainerState extends State<ChatListContainer> {
-
   bool isUserFetched() {
     setState(() {
       isUsersFetched = userList != null ? true : false;
     });
     return isUsersFetched;
   }
+
   buildSuggestions() {
     final List<User> alluserList = userList != null
-      ? userList.where((User user) {
-          String _getUsername = user.username.toLowerCase();
-          String _getName = user.name.toLowerCase();
-          bool matchesUsername = _getUsername.contains(_getUsername);
-          bool matchesName = _getName.contains(_getName);
+        ? userList.where((User user) {
+            String _getUsername = user.username.toLowerCase();
+            String _getName = user.name.toLowerCase();
+            bool matchesUsername = _getUsername.contains(_getUsername);
+            bool matchesName = _getName.contains(_getName);
 
-          return (matchesUsername || matchesName);
-        }).toList()
-      : [];
+            return (matchesUsername || matchesName);
+          }).toList()
+        : [];
 
     return ListView.builder(
       itemCount: alluserList.length,
       itemBuilder: ((context, index) {
         User fetchedUser = User(
-          uid: alluserList[index].uid,
-          profilePhoto: alluserList[index].profilePhoto,
-          name: alluserList[index].name,
-          username: alluserList[index].username
-        );
+            uid: alluserList[index].uid,
+            profilePhoto: alluserList[index].profilePhoto,
+            name: alluserList[index].name,
+            username: alluserList[index].username);
 
         return CustomTile(
           mini: false,
           onTap: () {
             Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ChatScreen(
-                  receiver: fetchedUser,
-                )
-              )
-            );
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ChatScreen(
+                          receiver: fetchedUser,
+                        )));
           },
           leading: CircleAvatar(
             backgroundImage: NetworkImage(fetchedUser.profilePhoto),
@@ -114,9 +111,7 @@ class _ChatListContainerState extends State<ChatListContainer> {
           ),
           subtitle: Text(
             fetchedUser.username,
-            style: TextStyle(
-              color: UniversalVariables.greyColor
-            ),
+            style: TextStyle(color: UniversalVariables.greyColor),
           ),
         );
       }),
@@ -125,18 +120,16 @@ class _ChatListContainerState extends State<ChatListContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        isUserFetched() 
+    return Stack(children: [
+      isUserFetched()
           ? Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: buildSuggestions(),
-            ) 
+            )
           : Center(
               child: CircularProgressIndicator(),
             )
-      ]
-    );
+    ]);
   }
 }
 

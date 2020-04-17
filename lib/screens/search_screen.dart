@@ -1,10 +1,9 @@
-  
 import 'package:chatapp/screens/dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:chatapp/models/user.dart';
-import 'package:chatapp/resources/firebase_repository.dart';
+import 'package:chatapp/resources/authentication_methods.dart';
 import 'package:chatapp/screens/callscreens/pickup/pickup_layout.dart';
 import 'package:chatapp/screens/chatscreens/chat_screen.dart';
 import 'package:chatapp/utils/universal_variables.dart';
@@ -18,7 +17,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  FirebaseRepository _firebaseRepository = FirebaseRepository();
+  final AuthenticationMethods _authenticationMethods = AuthenticationMethods();
 
   List<User> userList;
   String query = "";
@@ -28,8 +27,8 @@ class _SearchScreenState extends State<SearchScreen> {
   void initState() {
     super.initState();
 
-    _firebaseRepository.getCurrentUser().then((FirebaseUser user) {
-      _firebaseRepository.fetchAllUsers(user).then((List<User> list) {
+    _authenticationMethods.getCurrentUser().then((FirebaseUser user) {
+      _authenticationMethods.fetchAllUsers(user).then((List<User> list) {
         setState(() {
           userList = list;
         });
@@ -50,8 +49,7 @@ class _SearchScreenState extends State<SearchScreen> {
         onPressed: () {
           Navigator.pop(context);
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (BuildContext context) => Dashboard())
-          );                
+              builder: (BuildContext context) => Dashboard()));
         },
       ),
       elevation: 0,
@@ -97,18 +95,18 @@ class _SearchScreenState extends State<SearchScreen> {
 
   buildSuggestions(String query) {
     final List<User> suggestionList = query.isEmpty
-      ? []
-      : userList != null
-        ? userList.where((User user) {
-          String _getUsername = user.username.toLowerCase();
-          String _query = query.toLowerCase();
-          String _getName = user.name.toLowerCase();
-          bool matchesUsername = _getUsername.contains(_query);
-          bool matchesName = _getName.contains(_query);
+        ? []
+        : userList != null
+            ? userList.where((User user) {
+                String _getUsername = user.username.toLowerCase();
+                String _query = query.toLowerCase();
+                String _getName = user.name.toLowerCase();
+                bool matchesUsername = _getUsername.contains(_query);
+                bool matchesName = _getName.contains(_query);
 
-          return (matchesUsername || matchesName);
-        }).toList()
-      : [];
+                return (matchesUsername || matchesName);
+              }).toList()
+            : [];
 
     return ListView.builder(
       itemCount: suggestionList.length,
@@ -123,13 +121,11 @@ class _SearchScreenState extends State<SearchScreen> {
           mini: false,
           onTap: () {
             Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ChatScreen(
-                  receiver: searchedUser,
-                )
-              )
-            );
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ChatScreen(
+                          receiver: searchedUser,
+                        )));
           },
           leading: CircleAvatar(
             backgroundImage: NetworkImage(searchedUser.profilePhoto),
@@ -144,9 +140,7 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
           subtitle: Text(
             searchedUser.name,
-            style: TextStyle(
-              color: UniversalVariables.greyColor
-            ),
+            style: TextStyle(color: UniversalVariables.greyColor),
           ),
         );
       }),

@@ -1,18 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:chatapp/models/user.dart';
-import 'package:chatapp/resources/firebase_repository.dart';
+import 'package:chatapp/resources/authentication_methods.dart';
 
 class UserProvider with ChangeNotifier {
   User _user;
-  FirebaseRepository _firebaseRepository = FirebaseRepository();
+  AuthenticationMethods _authenticationMethods = AuthenticationMethods();
 
   User get getUser => _user;
 
   void refreshUser() async {
-    User user = await _firebaseRepository.getUserDetails();
+    User user = await _authenticationMethods.getUserDetails();
     _user = user;
     notifyListeners();
   }
-
 }

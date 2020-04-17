@@ -1,4 +1,4 @@
-import 'package:chatapp/resources/firebase_repository.dart';
+import 'package:chatapp/resources/authentication_methods.dart';
 import 'package:chatapp/screens/login.dart';
 import 'package:chatapp/screens/search_screen.dart';
 import 'package:chatapp/utils/universal_variables.dart';
@@ -20,15 +20,16 @@ class MainAppBar extends StatelessWidget {
   static const String wavingHandEmoji = "\uD83D\uDC4B";
   static const String whiteSkinTone = "\uD83C\uDFFB";
 
-  const MainAppBar({Key key, this.title, this.back, this.initials}) : super(key: key);
+  const MainAppBar({Key key, this.title, this.back, this.initials})
+      : super(key: key);
 
-  static FirebaseRepository _firebaseRepository = FirebaseRepository();
+  static final AuthenticationMethods _authenticationMethods =
+      AuthenticationMethods();
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
-      child: Material (
+      child: Material(
         elevation: 16,
         child: Container(
           height: appBarHeight(context),
@@ -40,31 +41,31 @@ class MainAppBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Expanded(
-                  flex:2,
+                  flex: 2,
                   child: Align(
                     alignment: Alignment.center,
-                    child:_buildleading(context),
+                    child: _buildleading(context),
                   ),
                 ),
                 Expanded(
                   flex: 6,
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child:_buildLabel(context),
+                    child: _buildLabel(context),
                   ),
                 ),
                 Expanded(
                   flex: 1,
                   child: Align(
                     alignment: Alignment.centerRight,
-                    child:null,
+                    child: null,
                   ),
                 ),
                 Expanded(
                   flex: 1,
                   child: Align(
                     alignment: Alignment.centerRight,
-                    child:_buildaction(context),
+                    child: _buildaction(context),
                   ),
                 ),
               ],
@@ -78,94 +79,98 @@ class MainAppBar extends StatelessWidget {
   Builder _buildleading(BuildContext context) {
     IconData _iconData;
     switch (back.toString()) {
-      case "dashboard" : {
-        return Builder(
-          builder: (context) => Container(
-            height: 40,
-            width: 40,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(50),
-              color: UniversalVariables.separatorColor,
-            ),
-            child: Stack(
-              children: <Widget>[
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    initials,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: UniversalVariables.lightBlueColor,
-                      fontSize: 13,
+      case "dashboard":
+        {
+          return Builder(
+            builder: (context) => Container(
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                color: UniversalVariables.separatorColor,
+              ),
+              child: Stack(
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      initials,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: UniversalVariables.lightBlueColor,
+                        fontSize: 13,
+                      ),
                     ),
                   ),
-                ),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: Container(
-                    height: 12,
-                    width: 12,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                            color: UniversalVariables.blackColor, width: 2),
-                        color: UniversalVariables.onlineDotColor),
-                  ),
-                )
-              ],
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: Container(
+                      height: 12,
+                      width: 12,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                              color: UniversalVariables.blackColor, width: 2),
+                          color: UniversalVariables.onlineDotColor),
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-        );
-      }
-      case "chatscreen" : {
-        _iconData = Icons.arrow_back;
-      }
-      break;
-      default: {
-        Navigator.pop(context);
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (BuildContext context) => Dashboard())
-        );
-      }
-      break;
+          );
+        }
+      case "chatscreen":
+        {
+          _iconData = Icons.arrow_back;
+        }
+        break;
+      default:
+        {
+          Navigator.pop(context);
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (BuildContext context) => Dashboard()));
+        }
+        break;
     }
     return Builder(
       builder: (context) => IconButton(
         color: green,
-        icon: new Icon(_iconData, color: white,),
+        icon: new Icon(
+          _iconData,
+          color: white,
+        ),
         onPressed: () {
           Navigator.pop(context);
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (BuildContext context) => Dashboard())
-          );                
+              builder: (BuildContext context) => Dashboard()));
         },
       ),
     );
   }
-  
+
   RichText _buildLabel(BuildContext context) {
     String _getEmoji;
-    if(title == 'Hi there!') {
+    if (title == 'Hi there!') {
       _getEmoji = getEmoji(context);
     } else {
       _getEmoji = '';
     }
     return RichText(
-        text: TextSpan(
-          style: new TextStyle(
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.w600,
-            fontSize: 18.0,
-            color: Colors.white,
-          ),
-          children: [
-            TextSpan(
-              text: title,
-            ),
-            TextSpan(text: _getEmoji),
-          ],
+      text: TextSpan(
+        style: new TextStyle(
+          fontFamily: 'Poppins',
+          fontWeight: FontWeight.w600,
+          fontSize: 18.0,
+          color: Colors.white,
         ),
-      );
+        children: [
+          TextSpan(
+            text: title,
+          ),
+          TextSpan(text: _getEmoji),
+        ],
+      ),
+    );
   }
 
   Builder _buildsearch(BuildContext context) {
@@ -176,23 +181,23 @@ class MainAppBar extends StatelessWidget {
         onPressed: () {
           Navigator.pop(context);
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (BuildContext context) => SearchScreen())
-          );
+              builder: (BuildContext context) => SearchScreen()));
         },
       ),
     );
   }
 
   Builder _buildaction(BuildContext context) {
-    String _alertdialogTitle, _alertdialogDescription, _alertdialogCancelButton, _alertdialogOkButton;
-    if(title == 'Hi there!') {
+    String _alertdialogTitle,
+        _alertdialogDescription,
+        _alertdialogCancelButton,
+        _alertdialogOkButton;
+    if (title == 'Hi there!') {
       _alertdialogTitle = 'Logout';
       _alertdialogDescription = 'Are you sure you want to Logout?';
       _alertdialogCancelButton = 'Cancel';
       _alertdialogOkButton = 'Ok';
-    } else {
-
-    }
+    } else {}
     return Builder(
       builder: (context) => IconButton(
         color: Colors.white,
@@ -221,11 +226,10 @@ class MainAppBar extends StatelessWidget {
                   FlatButton(
                     child: Text(_alertdialogOkButton),
                     onPressed: () {
-                      _firebaseRepository.signOut();
+                      _authenticationMethods.signOut();
                       Navigator.pop(context);
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) => Login())
-                      );
+                          builder: (BuildContext context) => Login()));
                     },
                   ),
                 ],
