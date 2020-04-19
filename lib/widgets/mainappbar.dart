@@ -1,5 +1,6 @@
 import 'package:chatapp/resources/authentication_methods.dart';
 import 'package:chatapp/screens/login.dart';
+import 'package:chatapp/screens/pageviews/chat_list/widgets/user_circle.dart';
 import 'package:chatapp/screens/search_screen.dart';
 import 'package:chatapp/utils/universal_variables.dart';
 import 'package:flutter/foundation.dart';
@@ -58,7 +59,7 @@ class MainAppBar extends StatelessWidget {
                   flex: 1,
                   child: Align(
                     alignment: Alignment.centerRight,
-                    child: null,
+                    child: _buildsearch(context),
                   ),
                 ),
                 Expanded(
@@ -82,41 +83,7 @@ class MainAppBar extends StatelessWidget {
       case "dashboard":
         {
           return Builder(
-            builder: (context) => Container(
-              height: 40,
-              width: 40,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: UniversalVariables.separatorColor,
-              ),
-              child: Stack(
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      initials,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: UniversalVariables.lightBlueColor,
-                        fontSize: 13,
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: Container(
-                      height: 12,
-                      width: 12,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                              color: UniversalVariables.blackColor, width: 2),
-                          color: UniversalVariables.onlineDotColor),
-                    ),
-                  )
-                ],
-              ),
-            ),
+            builder: (context) => UserCircle(),
           );
         }
       case "chatscreen":
@@ -246,50 +213,5 @@ class MainAppBar extends StatelessWidget {
     return Theme.of(context).platform == TargetPlatform.iOS
         ? wavingHandEmoji
         : wavingHandEmoji + whiteSkinTone;
-  }
-}
-
-class UserCircle extends StatelessWidget {
-  final String text;
-
-  UserCircle(this.text);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 40,
-      width: 40,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
-        color: UniversalVariables.separatorColor,
-      ),
-      child: Stack(
-        children: <Widget>[
-          Align(
-            alignment: Alignment.center,
-            child: Text(
-              text,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: UniversalVariables.lightBlueColor,
-                fontSize: 13,
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Container(
-              height: 12,
-              width: 12,
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                      color: UniversalVariables.blackColor, width: 2),
-                  color: UniversalVariables.onlineDotColor),
-            ),
-          )
-        ],
-      ),
-    );
   }
 }

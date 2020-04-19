@@ -1,3 +1,4 @@
+import 'package:chatapp/enum/user_state.dart';
 import 'package:chatapp/resources/authentication_methods.dart';
 import 'package:chatapp/utils/utilities.dart';
 import 'package:chatapp/widgets/mainappbar.dart';
@@ -8,10 +9,8 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:chatapp/provider/user_provider.dart';
 import 'package:chatapp/screens/callscreens/pickup/pickup_layout.dart';
-import 'package:chatapp/screens/pageviews/chat_list_screen.dart';
+import 'package:chatapp/screens/pageviews/chat_list/chat_list_screen.dart';
 import 'package:chatapp/utils/universal_variables.dart';
-
-import 'pageviews/chat_list_screen.dart';
 
 void main() async {
   SystemChrome.setEnabledSystemUIOverlays([]);
@@ -39,7 +38,7 @@ class MyDashboard extends StatefulWidget {
   _MyDashboardState createState() => _MyDashboardState();
 }
 
-class _MyDashboardState extends State<MyDashboard> {
+class _MyDashboardState extends State<MyDashboard> with WidgetsBindingObserver {
   PageController pageController;
   int _page = 0;
 
@@ -56,7 +55,14 @@ class _MyDashboardState extends State<MyDashboard> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       userProvider = Provider.of<UserProvider>(context, listen: false);
       userProvider.refreshUser();
+
+      _authenticationMethods.setUserState(
+        userId: userProvider.getUser.uid,
+        userState: UserState.Online,
+      );
     });
+
+    WidgetsBinding.instance.addObserver(this);
 
     pageController = PageController();
 
@@ -66,6 +72,49 @@ class _MyDashboardState extends State<MyDashboard> {
         initials = Utils.getInitials(user.displayName);
       });
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    String currentUserId =
+        (userProvider != null && userProvider.getUser != null)
+            ? userProvider.getUser.uid
+            : "";
+
+    super.didChangeAppLifecycleState(state);
+
+    switch (state) {
+      case AppLifecycleState.resumed:
+        currentUserId != null
+            ? _authenticationMethods.setUserState(
+                userId: currentUserId, userState: UserState.Online)
+            : print("resume state");
+        break;
+      case AppLifecycleState.inactive:
+        currentUserId != null
+            ? _authenticationMethods.setUserState(
+                userId: currentUserId, userState: UserState.Offline)
+            : print("inactive state");
+        break;
+      case AppLifecycleState.paused:
+        currentUserId != null
+            ? _authenticationMethods.setUserState(
+                userId: currentUserId, userState: UserState.Waiting)
+            : print("paused state");
+        break;
+      case AppLifecycleState.detached:
+        currentUserId != null
+            ? _authenticationMethods.setUserState(
+                userId: currentUserId, userState: UserState.Offline)
+            : print("detached state");
+        break;
+    }
   }
 
   void onPageChanged(int page) {

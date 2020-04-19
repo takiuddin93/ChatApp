@@ -45,8 +45,11 @@ class Utils {
       case UserState.Online:
         return 1;
 
-      default:
+      case UserState.Waiting:
         return 2;
+
+      default:
+        return 3;
     }
   }
 
@@ -57,6 +60,9 @@ class Utils {
 
       case 1:
         return UserState.Online;
+
+      case 2:
+        return UserState.Waiting;
 
       default:
         return UserState.Waiting;
