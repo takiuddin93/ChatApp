@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:chatapp/provider/image_upload_provider.dart';
 import 'package:chatapp/provider/user_provider.dart';
 import 'package:chatapp/resources/authentication_methods.dart';
+// import 'package:chatapp/screens/search_screen.dart';
 
 void main() {
   runApp(Main());
