@@ -53,7 +53,7 @@ class _SearchScreenState extends State<SearchScreen> {
         },
       ),
       elevation: 0,
-      bottom: PreferredSize(
+      title: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight + 20),
         child: Padding(
           padding: EdgeInsets.only(left: 20),

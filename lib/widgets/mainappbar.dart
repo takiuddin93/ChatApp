@@ -1,6 +1,6 @@
 import 'package:chatapp/resources/authentication_methods.dart';
 import 'package:chatapp/screens/login.dart';
-import 'package:chatapp/screens/pageviews/chat_list/widgets/user_circle.dart';
+import 'package:chatapp/screens/pageviews/chat_lists/widgets/user_circle.dart';
 import 'package:chatapp/screens/search_screen.dart';
 import 'package:chatapp/utils/universal_variables.dart';
 import 'package:flutter/foundation.dart';

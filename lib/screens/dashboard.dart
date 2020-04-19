@@ -9,7 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:chatapp/provider/user_provider.dart';
 import 'package:chatapp/screens/callscreens/pickup/pickup_layout.dart';
-import 'package:chatapp/screens/pageviews/chat_list/chat_list_screen.dart';
+import 'package:chatapp/screens/pageviews/chat_lists/chat_list_screen.dart';
 import 'package:chatapp/utils/universal_variables.dart';
 
 void main() async {
