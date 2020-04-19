@@ -50,9 +50,9 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
     await _initAgoraRtcEngine();
     _addAgoraEventHandlers();
     await AgoraRtcEngine.enableWebSdkInteroperability(true);
-    await AgoraRtcEngine.setParameters('''{\"che.video.lowBitRateStreamParameter\":{\"width\":320,\"height\":180,\"frameRate\":15,\"bitRate\":140}}''');
+    await AgoraRtcEngine.setParameters(
+        '''{\"che.video.lowBitRateStreamParameter\":{\"width\":320,\"height\":180,\"frameRate\":15,\"bitRate\":140}}''');
     await AgoraRtcEngine.joinChannel(null, widget.call.channelId, null, 0);
-    
   }
 
   addPostFrameCallback() {
@@ -364,7 +364,7 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
         child: Stack(
           children: <Widget>[
             _viewRows(),
-            // _panel(),
+            _panel(),
             _toolbar(),
           ],
         ),

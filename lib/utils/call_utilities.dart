@@ -5,7 +5,7 @@ import 'package:chatapp/models/user.dart';
 import 'package:chatapp/resources/call_methods.dart';
 import 'package:chatapp/screens/callscreens/videocall_screen.dart';
 import 'package:chatapp/screens/callscreens/voicecall_screen.dart';
-import 'package:chatapp/utils/utilities.dart';
+// import 'package:chatapp/utils/utilities.dart';
 
 class CallUtils {
   static final CallMethods callMethods = CallMethods();

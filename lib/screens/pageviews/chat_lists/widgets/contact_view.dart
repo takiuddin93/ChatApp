@@ -8,7 +8,7 @@ import 'package:chatapp/resources/chat_methods.dart';
 import 'package:chatapp/screens/chatscreens/chat_screen.dart';
 import 'package:chatapp/screens/chatscreens/widgets/cached_image.dart';
 import 'package:chatapp/screens/pageviews/chat_lists/widgets/online_dot_indicator.dart';
-import 'package:chatapp/utils/universal_variables.dart';
+// import 'package:chatapp/utils/universal_variables.dart';
 import 'package:chatapp/widgets/custom_tile.dart';
 
 import 'last_message_container.dart';

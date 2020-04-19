@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:chatapp/models/user.dart';
 import 'package:chatapp/resources/authentication_methods.dart';

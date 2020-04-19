@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:chatapp/widgets/chatappbar.dart';
-import 'package:chatapp/widgets/mainappbar.dart';
+// import 'package:chatapp/widgets/mainappbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emoji_picker/emoji_picker.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +87,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     _imageUploadProvider = Provider.of<ImageUploadProvider>(context);
-    Size media = MediaQuery.of(context).size;
+    // Size media = MediaQuery.of(context).size;
 
     return PickupLayout(
       scaffold: Scaffold(
