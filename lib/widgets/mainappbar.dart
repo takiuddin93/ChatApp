@@ -34,7 +34,7 @@ class MainAppBar extends StatelessWidget {
         elevation: 16,
         child: Container(
           height: appBarHeight(context),
-          color: UniversalVariables.blackColor,
+          color: UniversalVariables.appBar,
           child: Padding(
             padding: EdgeInsets.all(0.0),
             child: Row(

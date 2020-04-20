@@ -134,7 +134,7 @@ class _MyDashboardState extends State<MyDashboard> with WidgetsBindingObserver {
 
     return PickupLayout(
       scaffold: Scaffold(
-        backgroundColor: UniversalVariables.blackColor,
+        backgroundColor: UniversalVariables.whiteColor,
         appBar: PreferredSize(
           child: MainAppBar(
               title: widget.title, back: "dashboard", initials: initials),

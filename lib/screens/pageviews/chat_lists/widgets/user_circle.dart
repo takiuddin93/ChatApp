@@ -14,7 +14,7 @@ class UserCircle extends StatelessWidget {
       width: 40,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50),
-        color: UniversalVariables.separatorColor,
+        color: UniversalVariables.appBarUserIcon,
       ),
       child: Stack(
         children: <Widget>[
@@ -37,7 +37,7 @@ class UserCircle extends StatelessWidget {
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                      color: UniversalVariables.blackColor, width: 2),
+                      color: UniversalVariables.appBarUserIcon, width: 1),
                   color: UniversalVariables.onlineDotColor),
             ),
           )

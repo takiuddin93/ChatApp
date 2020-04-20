@@ -1,3 +1,4 @@
+import 'package:chatapp/utils/universal_variables.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:chatapp/models/contact.dart';
@@ -60,15 +61,23 @@ class ViewLayout extends StatelessWidget {
               receiver: contact,
             ),
           )),
-      title: Text(
-        (contact != null ? contact.name : null) != null ? contact.name : "..",
-        style:
-            TextStyle(color: Colors.white, fontFamily: "Arial", fontSize: 19),
+      title: Padding(
+        padding: EdgeInsets.only(left: 8, top: 0, right: 0, bottom: 0),
+        child: Text(
+          (contact != null ? contact.name : null) != null ? contact.name : "..",
+          style: TextStyle(
+              color: UniversalVariables.textColor,
+              fontFamily: "Arial",
+              fontSize: 19),
+        ),
       ),
-      subtitle: LastMessageContainer(
-        stream: _chatMethods.fetchLastMessageBetween(
-          senderId: userProvider.getUser.uid,
-          receiverId: contact.uid,
+      subtitle: Padding(
+        padding: EdgeInsets.only(left: 8, top: 0, right: 0, bottom: 0),
+        child: LastMessageContainer(
+          stream: _chatMethods.fetchLastMessageBetween(
+            senderId: userProvider.getUser.uid,
+            receiverId: contact.uid,
+          ),
         ),
       ),
       leading: Container(

@@ -19,7 +19,7 @@ class ChatListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PickupLayout(
       scaffold: Scaffold(
-        backgroundColor: UniversalVariables.blackColor,
+        backgroundColor: UniversalVariables.transparentColor,
         body: ChatListContainer(),
         floatingActionButton: NewChatButton(),
       ),

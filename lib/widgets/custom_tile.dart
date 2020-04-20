@@ -30,20 +30,17 @@ class CustomTile extends StatelessWidget {
       onTap: onTap,
       onLongPress: onLongPress,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: mini ? 10 : 0),
         margin: margin,
+        padding: EdgeInsets.symmetric(vertical: mini ? 3 : 20),
+        decoration: BoxDecoration(
+            border: Border(
+                bottom: BorderSide(
+                    width: 1, color: UniversalVariables.separatorColor))),
         child: Row(
           children: <Widget>[
             leading,
             Expanded(
               child: Container(
-                margin: EdgeInsets.only(left: mini ? 10 : 15),
-                padding: EdgeInsets.symmetric(vertical: mini ? 3 : 20),
-                decoration: BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(
-                            width: 1,
-                            color: UniversalVariables.separatorColor))),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
