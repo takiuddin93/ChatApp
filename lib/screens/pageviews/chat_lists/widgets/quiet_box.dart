@@ -21,6 +21,7 @@ class QuietBox extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
+                  color: UniversalVariables.whiteColor,
                 ),
               ),
               SizedBox(height: 25),
@@ -31,12 +32,18 @@ class QuietBox extends StatelessWidget {
                   letterSpacing: 1.2,
                   fontWeight: FontWeight.normal,
                   fontSize: 18,
+                  color: UniversalVariables.whiteColor,
                 ),
               ),
               SizedBox(height: 25),
               FlatButton(
                 color: UniversalVariables.lightBlueColor,
-                child: Text("START SEARCHING"),
+                child: Text(
+                  "START SEARCHING",
+                  style: TextStyle(
+                    color: UniversalVariables.whiteColor,
+                  ),
+                ),
                 onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(

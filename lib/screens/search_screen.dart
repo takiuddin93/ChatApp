@@ -45,7 +45,10 @@ class _SearchScreenState extends State<SearchScreen> {
         ],
       ),
       leading: IconButton(
-        icon: Icon(Icons.arrow_back, color: Colors.white),
+        icon: Icon(
+          Icons.arrow_back,
+          color: UniversalVariables.whiteColor,
+        ),
         onPressed: () {
           Navigator.pop(context);
           Navigator.of(context).push(MaterialPageRoute(
@@ -68,12 +71,15 @@ class _SearchScreenState extends State<SearchScreen> {
             autofocus: true,
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: UniversalVariables.whiteColor,
               fontSize: 35,
             ),
             decoration: InputDecoration(
               suffixIcon: IconButton(
-                icon: Icon(Icons.close, color: Colors.white),
+                icon: Icon(
+                  Icons.close,
+                  color: UniversalVariables.whiteColor,
+                ),
                 onPressed: () {
                   WidgetsBinding.instance
                       .addPostFrameCallback((_) => searchController.clear());
@@ -129,12 +135,12 @@ class _SearchScreenState extends State<SearchScreen> {
           },
           leading: CircleAvatar(
             backgroundImage: NetworkImage(searchedUser.profilePhoto),
-            backgroundColor: Colors.grey,
+            backgroundColor: UniversalVariables.greyColor,
           ),
           title: Text(
             searchedUser.username,
             style: TextStyle(
-              color: Colors.white,
+              color: UniversalVariables.whiteColor,
               fontWeight: FontWeight.bold,
             ),
           ),
