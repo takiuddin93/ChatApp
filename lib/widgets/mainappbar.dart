@@ -31,7 +31,7 @@ class MainAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Material(
-        elevation: 16,
+        elevation: 8,
         child: Container(
           height: appBarHeight(context),
           color: UniversalVariables.appBar,

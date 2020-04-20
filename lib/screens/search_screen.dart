@@ -1,4 +1,5 @@
 import 'package:chatapp/screens/dashboard.dart';
+import 'package:chatapp/widgets/mainappbar_style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
@@ -37,63 +38,76 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   searchAppBar(BuildContext context) {
-    return GradientAppBar(
-      gradient: LinearGradient(
-        colors: [
-          UniversalVariables.gradientColorStart,
-          UniversalVariables.gradientColorEnd,
-        ],
-      ),
-      leading: IconButton(
-        icon: Icon(
-          Icons.arrow_back,
-          color: UniversalVariables.whiteColor,
-        ),
-        onPressed: () {
-          Navigator.pop(context);
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) => Dashboard()));
-        },
-      ),
-      elevation: 0,
-      title: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight + 20),
-        child: Padding(
-          padding: EdgeInsets.only(left: 20),
-          child: TextField(
-            controller: searchController,
-            onChanged: (val) {
-              setState(() {
-                query = val;
-              });
-            },
-            cursorColor: UniversalVariables.blackColor,
-            autofocus: true,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: UniversalVariables.whiteColor,
-              fontSize: 35,
-            ),
-            decoration: InputDecoration(
-              suffixIcon: IconButton(
-                icon: Icon(
-                  Icons.close,
-                  color: UniversalVariables.whiteColor,
+    return Container(
+      height: appBarHeight(context),
+      color: UniversalVariables.appBar,
+      child: Padding(
+        padding: EdgeInsets.all(0.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              flex: 2,
+              child: Align(
+                alignment: Alignment.center,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: UniversalVariables.whiteColor,
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) => Dashboard()));
+                  },
                 ),
-                onPressed: () {
-                  WidgetsBinding.instance
-                      .addPostFrameCallback((_) => searchController.clear());
-                },
-              ),
-              border: InputBorder.none,
-              hintText: "Search",
-              hintStyle: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 35,
-                color: Color(0x88ffffff),
               ),
             ),
-          ),
+            Expanded(
+              flex: 8,
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 20),
+                  child: TextField(
+                    controller: searchController,
+                    onChanged: (val) {
+                      setState(() {
+                        query = val;
+                      });
+                    },
+                    cursorColor: UniversalVariables.blackColor,
+                    autofocus: true,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: UniversalVariables.whiteColor,
+                      fontSize: 35,
+                    ),
+                    decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          Icons.close,
+                          color: UniversalVariables.whiteColor,
+                        ),
+                        onPressed: () {
+                          WidgetsBinding.instance.addPostFrameCallback(
+                              (_) => searchController.clear());
+                        },
+                      ),
+                      border: InputBorder.none,
+                      hintText: "Search",
+                      hintStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 35,
+                        color: Color(0x88ffffff),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -125,28 +139,32 @@ class _SearchScreenState extends State<SearchScreen> {
 
         return CustomTile(
           mini: false,
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ChatScreen(
-                          receiver: searchedUser,
-                        )));
-          },
+          onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ChatScreen(
+                        receiver: searchedUser,
+                      ))),
+          title: Padding(
+            padding: EdgeInsets.only(left: 8, top: 0, right: 0, bottom: 0),
+            child: Text(
+              searchedUser.name,
+              style: TextStyle(
+                color: UniversalVariables.textColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          subtitle: Padding(
+            padding: EdgeInsets.only(left: 8, top: 0, right: 0, bottom: 0),
+            child: Text(
+              searchedUser.username,
+              style: TextStyle(color: UniversalVariables.subtextColor),
+            ),
+          ),
           leading: CircleAvatar(
             backgroundImage: NetworkImage(searchedUser.profilePhoto),
             backgroundColor: UniversalVariables.greyColor,
-          ),
-          title: Text(
-            searchedUser.username,
-            style: TextStyle(
-              color: UniversalVariables.whiteColor,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          subtitle: Text(
-            searchedUser.name,
-            style: TextStyle(color: UniversalVariables.greyColor),
           ),
         );
       }),
@@ -157,8 +175,11 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return PickupLayout(
       scaffold: Scaffold(
-        backgroundColor: UniversalVariables.blackColor,
-        appBar: searchAppBar(context),
+        backgroundColor: UniversalVariables.whiteColor,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(kToolbarHeight),
+          child: searchAppBar(context),
+        ),
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: buildSuggestions(query),

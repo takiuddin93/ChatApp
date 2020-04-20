@@ -16,7 +16,7 @@ class NewChatButton extends StatelessWidget {
             gradient: UniversalVariables.fabGradient,
             borderRadius: BorderRadius.circular(50)),
         child: Icon(
-          Icons.add_circle,
+          Icons.add_comment,
           color: Colors.white,
           size: 25,
         ),

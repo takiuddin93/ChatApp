@@ -91,7 +91,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
     return PickupLayout(
       scaffold: Scaffold(
-        backgroundColor: UniversalVariables.blackColor,
+        backgroundColor: UniversalVariables.whiteColor,
         appBar: customAppBar(context),
         body: Column(
           children: <Widget>[
@@ -253,7 +253,7 @@ class _ChatScreenState extends State<ChatScreen> {
       showModalBottomSheet(
           context: context,
           elevation: 0,
-          backgroundColor: UniversalVariables.blackColor,
+          backgroundColor: UniversalVariables.blueColor,
           builder: (context) {
             return Column(
               children: <Widget>[
@@ -352,10 +352,13 @@ class _ChatScreenState extends State<ChatScreen> {
             child: Container(
               padding: EdgeInsets.all(5),
               decoration: BoxDecoration(
-                gradient: UniversalVariables.fabGradient,
+                color: UniversalVariables.blueColor,
                 shape: BoxShape.circle,
               ),
-              child: Icon(Icons.add),
+              child: Icon(
+                Icons.add,
+                color: UniversalVariables.whiteColor,
+              ),
             ),
           ),
           SizedBox(
@@ -407,7 +410,10 @@ class _ChatScreenState extends State<ChatScreen> {
                       hideEmojiContainer();
                     }
                   },
-                  icon: Icon(Icons.face),
+                  icon: Icon(
+                    Icons.face,
+                    color: UniversalVariables.blueColor,
+                  ),
                 ),
               ],
             ),
@@ -416,12 +422,18 @@ class _ChatScreenState extends State<ChatScreen> {
               ? Container()
               : Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Icon(Icons.record_voice_over),
+                  child: Icon(
+                    Icons.record_voice_over,
+                    color: UniversalVariables.blueColor,
+                  ),
                 ),
           isWriting
               ? Container()
               : GestureDetector(
-                  child: Icon(Icons.camera_alt),
+                  child: Icon(
+                    Icons.camera_alt,
+                    color: UniversalVariables.blueColor,
+                  ),
                   onTap: () => pickImage(source: ImageSource.camera),
                 ),
           isWriting
