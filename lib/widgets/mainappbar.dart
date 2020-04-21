@@ -164,20 +164,14 @@ class MainAppBar extends StatelessWidget {
   }
 
   Builder _buildaction(BuildContext context) {
-    String _alertdialogTitle,
-        _alertdialogDescription,
-        _alertdialogCancelButton,
-        _alertdialogOkButton;
-    if (title == 'Hi there!') {
-      _alertdialogTitle = 'Logout';
-      _alertdialogDescription = 'Are you sure you want to Logout?';
-      _alertdialogCancelButton = 'Cancel';
-      _alertdialogOkButton = 'Ok';
-    } else {}
+    String _alertdialogTitle, _alertdialogDescription, _alertdialogOkButton;
+    _alertdialogTitle = 'Notification';
+    _alertdialogDescription = 'This feature has not been implemented yet!';
+    _alertdialogOkButton = 'Ok';
     return Builder(
       builder: (context) => IconButton(
         color: UniversalVariables.whiteColor,
-        icon: new Icon(Icons.exit_to_app),
+        icon: new Icon(Icons.notifications),
         onPressed: () {
           showDialog<void>(
             context: context,
@@ -206,17 +200,6 @@ class MainAppBar extends StatelessWidget {
                 actions: <Widget>[
                   FlatButton(
                     child: Text(
-                      _alertdialogCancelButton,
-                      style: TextStyle(
-                        color: UniversalVariables.blueColor,
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  FlatButton(
-                    child: Text(
                       _alertdialogOkButton,
                       style: TextStyle(
                         color: UniversalVariables.blueColor,
@@ -225,8 +208,6 @@ class MainAppBar extends StatelessWidget {
                     onPressed: () {
                       _authenticationMethods.signOut();
                       Navigator.pop(context);
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (BuildContext context) => Login()));
                     },
                   ),
                 ],

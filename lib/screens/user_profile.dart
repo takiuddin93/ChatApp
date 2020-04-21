@@ -4,6 +4,8 @@ import 'package:chatapp/provider/user_provider.dart';
 import 'package:chatapp/widgets/mainappbar.dart';
 import 'package:chatapp/utils/universal_variables.dart';
 import 'package:chatapp/screens/chatscreens/widgets/cached_image.dart';
+import 'package:chatapp/resources/authentication_methods.dart';
+import 'package:chatapp/screens/login.dart';
 import 'package:flutter/services.dart';
 
 class UserProfile extends StatefulWidget {
@@ -12,6 +14,7 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
+  final AuthenticationMethods _authenticationMethods = AuthenticationMethods();
   @override
   Widget build(BuildContext context) {
     Size media = MediaQuery.of(context).size;
@@ -19,6 +22,14 @@ class _UserProfileState extends State<UserProfile> {
     final double itemWidth = media.width;
 
     final UserProvider userProvider = Provider.of<UserProvider>(context);
+    String _alertdialogTitle,
+        _alertdialogDescription,
+        _alertdialogCancelButton,
+        _alertdialogOkButton;
+    _alertdialogTitle = 'Logout';
+    _alertdialogDescription = 'Are you sure you want to Logout?';
+    _alertdialogCancelButton = 'Cancel';
+    _alertdialogOkButton = 'Ok';
 
     return Scaffold(
       appBar: PreferredSize(
@@ -231,7 +242,67 @@ class _UserProfileState extends State<UserProfile> {
                           ],
                         ),
                         child: new InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            showDialog<void>(
+                              context: context,
+                              barrierDismissible:
+                                  false, // user must tap button!
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  backgroundColor:
+                                      UniversalVariables.separatorColor,
+                                  title: Text(
+                                    _alertdialogTitle,
+                                    style: TextStyle(
+                                      color: UniversalVariables.blueColor,
+                                    ),
+                                  ),
+                                  content: SingleChildScrollView(
+                                    child: ListBody(
+                                      children: <Widget>[
+                                        Text(
+                                          _alertdialogDescription,
+                                          style: TextStyle(
+                                            color: UniversalVariables.blueColor,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      child: Text(
+                                        _alertdialogCancelButton,
+                                        style: TextStyle(
+                                          color: UniversalVariables.blueColor,
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                    FlatButton(
+                                      child: Text(
+                                        _alertdialogOkButton,
+                                        style: TextStyle(
+                                          color: UniversalVariables.blueColor,
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        _authenticationMethods.signOut();
+                                        Navigator.pop(context);
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        Login()));
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             mainAxisSize: MainAxisSize.min,
@@ -261,7 +332,7 @@ class _UserProfileState extends State<UserProfile> {
                                             Align(
                                               alignment: Alignment.centerLeft,
                                               child: Text(
-                                                userProvider.getUser.email,
+                                                'Logout',
                                                 style: TextStyle(
                                                   color: UniversalVariables
                                                       .textColor,
