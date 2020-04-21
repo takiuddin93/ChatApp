@@ -47,7 +47,7 @@ class CustomTile extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        title,
+                        title ?? Container(),
                         SizedBox(height: 5),
                         Row(
                           children: <Widget>[

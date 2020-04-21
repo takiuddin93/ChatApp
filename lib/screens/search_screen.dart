@@ -57,7 +57,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     color: UniversalVariables.whiteColor,
                   ),
                   onPressed: () {
-                    Navigator.pop(context);
+                    // Navigator.pop(context);
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (BuildContext context) => Dashboard()));
                   },
@@ -166,6 +166,20 @@ class _SearchScreenState extends State<SearchScreen> {
             backgroundImage: NetworkImage(searchedUser.profilePhoto),
             backgroundColor: UniversalVariables.greyColor,
           ),
+          trailing: Container(
+              decoration: BoxDecoration(
+                  color: UniversalVariables.blueColor,
+                  borderRadius: BorderRadius.all(Radius.circular(4))),
+              // color: UniversalVariables.blueColor,
+              child: FlatButton(
+                  onPressed: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Dashboard())),
+                  child: Text(
+                    "Add Contact",
+                    style: TextStyle(
+                      color: UniversalVariables.whiteColor,
+                    ),
+                  ))),
         );
       }),
     );

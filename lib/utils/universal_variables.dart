@@ -11,7 +11,9 @@ class UniversalVariables {
   static final Color blackColor = Color(0xff19191b);
   static final Color greyColor = Color(0xff8f8f8f);
   static final Color userCircleBackground = Color(0xff2b2b33);
-  static final Color onlineDotColor = Color(0xff46dc64);
+  static final Color onlineDotColor = Color(0xFF30D158);
+  static final Color offlineDotColor = Color(0xFFFF3B30);
+  static final Color waitingDotColor = Color(0xFFE19500);
   static final Color lightBlueColor = Color(0xff0077d7);
   static final Color separatorColor = Color(0xFFDEEEFB);
 

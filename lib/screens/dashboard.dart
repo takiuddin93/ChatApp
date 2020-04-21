@@ -1,5 +1,6 @@
 import 'package:chatapp/enum/user_state.dart';
 import 'package:chatapp/resources/authentication_methods.dart';
+import 'package:chatapp/screens/pageviews/contact_lists/contact_list_screen.dart';
 import 'package:chatapp/utils/utilities.dart';
 import 'package:chatapp/widgets/mainappbar.dart';
 import 'package:flutter/cupertino.dart';
@@ -152,13 +153,7 @@ class _MyDashboardState extends State<MyDashboard> with WidgetsBindingObserver {
                 color: UniversalVariables.blueColor,
               ),
             )),
-            Center(
-                child: Text(
-              "Contact Screen",
-              style: TextStyle(
-                color: UniversalVariables.blueColor,
-              ),
-            )),
+            Center(child: ContactListScreen()),
           ],
           controller: pageController,
           onPageChanged: onPageChanged,

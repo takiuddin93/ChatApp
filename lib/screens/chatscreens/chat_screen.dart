@@ -373,7 +373,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   focusNode: textFieldFocus,
                   onTap: () => hideEmojiContainer(),
                   style: TextStyle(
-                    color: Colors.white,
+                    color: UniversalVariables.blueColor,
                   ),
                   onChanged: (val) {
                     (val.length > 0 && val.trim() != "")
@@ -440,12 +440,13 @@ class _ChatScreenState extends State<ChatScreen> {
               ? Container(
                   margin: EdgeInsets.only(left: 10),
                   decoration: BoxDecoration(
-                      gradient: UniversalVariables.fabGradient,
+                      color: UniversalVariables.blueColor,
                       shape: BoxShape.circle),
                   child: IconButton(
                     icon: Icon(
                       Icons.send,
-                      size: 15,
+                      color: UniversalVariables.whiteColor,
+                      size: 24,
                     ),
                     onPressed: () => sendMessage(),
                   ))
