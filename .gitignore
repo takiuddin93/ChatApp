@@ -34,7 +34,7 @@
 google-services.json
 
 # Agora
-lib/config/config.dart
+lib/config/agora_configs.dart
 
 # Web related
 lib/generated_plugin_registrant.dart
