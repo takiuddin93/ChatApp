@@ -4,7 +4,7 @@ A new Flutter project.
 
 ## Description
 
-A Flutter Chat Application, using Firebase for Google Sign In/Sign Up, exchange texts, emojis, and images. Integrated Adora Sdk for communicating over video calls. A little tweaking to communicate over voice calls only.
+A Flutter Chat Application, using Firebase for Google Sign In/Sign Up, exchange texts, emojis, and images. Integrated Agora Sdk for communicating over video calls. A little tweaking to communicate over voice calls only.
 
 ## For Beginners
 
