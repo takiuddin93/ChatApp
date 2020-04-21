@@ -22,7 +22,7 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="ChatApp"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@drawable/ic_chat_app_logo">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
