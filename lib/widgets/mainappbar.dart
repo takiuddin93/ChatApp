@@ -6,6 +6,7 @@ import 'package:chatapp/utils/universal_variables.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:chatapp/screens/dashboard.dart';
+import 'package:chatapp/screens/user_profile.dart';
 import 'package:chatapp/widgets/mainappbar_style.dart';
 
 Color green = Color(0xFF6B8449);
@@ -83,10 +84,18 @@ class MainAppBar extends StatelessWidget {
       case "dashboard":
         {
           return Builder(
-            builder: (context) => UserCircle(),
+            builder: (context) => UserCircle(
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => UserProfile())),
+            ),
           );
         }
       case "chatscreen":
+        {
+          _iconData = Icons.arrow_back;
+        }
+        break;
+      case "userprofile":
         {
           _iconData = Icons.arrow_back;
         }

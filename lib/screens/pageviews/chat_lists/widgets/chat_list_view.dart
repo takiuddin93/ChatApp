@@ -14,11 +14,11 @@ import 'package:chatapp/widgets/custom_tile.dart';
 
 import 'last_message_container.dart';
 
-class ContactView extends StatelessWidget {
+class ChatListView extends StatelessWidget {
   final Contact contact;
   final AuthenticationMethods _authenticationMethods = AuthenticationMethods();
 
-  ContactView(this.contact);
+  ChatListView(this.contact);
 
   @override
   Widget build(BuildContext context) {

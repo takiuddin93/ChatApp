@@ -11,11 +11,11 @@ import 'package:chatapp/screens/chatscreens/widgets/cached_image.dart';
 import 'package:chatapp/screens/pageviews/contact_lists/widgets/online_dot_indicator.dart';
 import 'package:chatapp/widgets/custom_tile.dart';
 
-class ContactView extends StatelessWidget {
+class ContactListView extends StatelessWidget {
   final Contact contact;
   final AuthenticationMethods _authenticationMethods = AuthenticationMethods();
 
-  ContactView(this.contact);
+  ContactListView(this.contact);
 
   @override
   Widget build(BuildContext context) {
