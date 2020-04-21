@@ -178,7 +178,7 @@ class _SearchScreenState extends State<SearchScreen> {
               // color: UniversalVariables.blueColor,
               child: FlatButton(
                   onPressed: () => _contactMethods.addContactToDb(
-                      userProvider.getUser.name, searchedUser.uid),
+                      userProvider.getUser, searchedUser),
                   child: Text(
                     "Add Contact",
                     style: TextStyle(

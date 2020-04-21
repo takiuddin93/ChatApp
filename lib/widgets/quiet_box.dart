@@ -21,7 +21,7 @@ class QuietBox extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
-                  color: UniversalVariables.whiteColor,
+                  color: UniversalVariables.blueColor,
                 ),
               ),
               SizedBox(height: 25),
@@ -32,7 +32,7 @@ class QuietBox extends StatelessWidget {
                   letterSpacing: 1.2,
                   fontWeight: FontWeight.normal,
                   fontSize: 18,
-                  color: UniversalVariables.whiteColor,
+                  color: UniversalVariables.blueColor,
                 ),
               ),
               SizedBox(height: 25),

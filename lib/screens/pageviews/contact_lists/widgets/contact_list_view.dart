@@ -5,14 +5,11 @@ import 'package:chatapp/models/contact.dart';
 import 'package:chatapp/models/user.dart';
 import 'package:chatapp/provider/user_provider.dart';
 import 'package:chatapp/resources/authentication_methods.dart';
-import 'package:chatapp/resources/chat_methods.dart';
+import 'package:chatapp/resources/contact_methods.dart';
 import 'package:chatapp/screens/chatscreens/chat_screen.dart';
 import 'package:chatapp/screens/chatscreens/widgets/cached_image.dart';
 import 'package:chatapp/screens/pageviews/contact_lists/widgets/online_dot_indicator.dart';
-// import 'package:chatapp/utils/universal_variables.dart';
 import 'package:chatapp/widgets/custom_tile.dart';
-
-import 'last_message_container.dart';
 
 class ContactView extends StatelessWidget {
   final Contact contact;
@@ -42,7 +39,7 @@ class ContactView extends StatelessWidget {
 
 class ViewLayout extends StatelessWidget {
   final User contact;
-  final ChatMethods _chatMethods = ChatMethods();
+  final ContactMethods _contactMethods = ContactMethods();
 
   ViewLayout({
     @required this.contact,
@@ -73,12 +70,7 @@ class ViewLayout extends StatelessWidget {
       ),
       subtitle: Padding(
         padding: EdgeInsets.only(left: 8, top: 0, right: 0, bottom: 0),
-        child: LastMessageContainer(
-          stream: _chatMethods.fetchLastMessageBetween(
-            senderId: userProvider.getUser.uid,
-            receiverId: contact.uid,
-          ),
-        ),
+        child: null,
       ),
       leading: Container(
         constraints: BoxConstraints(maxHeight: 60, maxWidth: 60),

@@ -1,6 +1,6 @@
 import 'package:chatapp/resources/authentication_methods.dart';
 import 'package:chatapp/screens/login.dart';
-import 'package:chatapp/screens/pageviews/chat_lists/widgets/user_circle.dart';
+import 'package:chatapp/widgets/user_circle.dart';
 import 'package:chatapp/screens/search_screen.dart';
 import 'package:chatapp/utils/universal_variables.dart';
 import 'package:flutter/foundation.dart';
@@ -167,7 +167,7 @@ class MainAppBar extends StatelessWidget {
     } else {}
     return Builder(
       builder: (context) => IconButton(
-        color: Colors.white,
+        color: UniversalVariables.whiteColor,
         icon: new Icon(Icons.exit_to_app),
         onPressed: () {
           showDialog<void>(
@@ -175,23 +175,44 @@ class MainAppBar extends StatelessWidget {
             barrierDismissible: false, // user must tap button!
             builder: (BuildContext context) {
               return AlertDialog(
-                title: Text(_alertdialogTitle),
+                backgroundColor: UniversalVariables.separatorColor,
+                title: Text(
+                  _alertdialogTitle,
+                  style: TextStyle(
+                    color: UniversalVariables.blueColor,
+                  ),
+                ),
                 content: SingleChildScrollView(
                   child: ListBody(
                     children: <Widget>[
-                      Text(_alertdialogDescription),
+                      Text(
+                        _alertdialogDescription,
+                        style: TextStyle(
+                          color: UniversalVariables.blueColor,
+                        ),
+                      ),
                     ],
                   ),
                 ),
                 actions: <Widget>[
                   FlatButton(
-                    child: Text(_alertdialogCancelButton),
+                    child: Text(
+                      _alertdialogCancelButton,
+                      style: TextStyle(
+                        color: UniversalVariables.blueColor,
+                      ),
+                    ),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   ),
                   FlatButton(
-                    child: Text(_alertdialogOkButton),
+                    child: Text(
+                      _alertdialogOkButton,
+                      style: TextStyle(
+                        color: UniversalVariables.blueColor,
+                      ),
+                    ),
                     onPressed: () {
                       _authenticationMethods.signOut();
                       Navigator.pop(context);

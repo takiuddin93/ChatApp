@@ -8,21 +8,18 @@ import 'package:chatapp/models/user.dart';
 class ContactMethods {
   static final Firestore _firestore = Firestore.instance;
 
-  final CollectionReference _messageCollection =
-      _firestore.collection(MESSAGES_COLLECTION);
-
   final CollectionReference _userCollection =
       _firestore.collection(USERS_COLLECTION);
 
-  Future<void> addContactToDb(String sender, String receiver) async {
-    // var map = message.toMap();
+  Future<void> addContactToDb(User sender, User receiver) async {
+    // var map = sender.toMap();
 
     // await _messageCollection
     //     .document(message.senderId)
     //     .collection(message.receiverId)
     //     .add(map);
 
-    addToContacts(senderId: sender, receiverId: receiver);
+    addToContacts(senderId: sender.uid, receiverId: receiver.uid);
   }
 
   DocumentReference getContactsDocument({String of, String forContact}) =>
