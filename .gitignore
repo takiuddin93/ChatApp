@@ -33,6 +33,9 @@
 # Android
 google-services.json
 
+# Agora
+lib/config/config.dart
+
 # Web related
 lib/generated_plugin_registrant.dart
 
