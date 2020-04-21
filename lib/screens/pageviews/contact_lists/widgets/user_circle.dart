@@ -24,7 +24,7 @@ class UserCircle extends StatelessWidget {
               Utils.getInitials(userProvider.getUser.name),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: UniversalVariables.lightBlueColor,
+                color: UniversalVariables.blueColor,
                 fontSize: 13,
               ),
             ),

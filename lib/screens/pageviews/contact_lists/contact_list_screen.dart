@@ -1,10 +1,10 @@
+import 'package:chatapp/resources/contact_methods.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:chatapp/models/contact.dart';
 import 'package:chatapp/provider/user_provider.dart';
 // import 'package:chatapp/resources/authentication_methods.dart';
-import 'package:chatapp/resources/chat_methods.dart';
 import 'package:chatapp/screens/callscreens/pickup/pickup_layout.dart';
 import 'package:chatapp/screens/pageviews/contact_lists/widgets/contact_view.dart';
 import 'package:chatapp/screens/pageviews/contact_lists/widgets/new_chat_button.dart';
@@ -28,7 +28,7 @@ class ContactListScreen extends StatelessWidget {
 }
 
 class ContactListContainer extends StatelessWidget {
-  final ChatMethods _chatMethods = ChatMethods();
+  final ContactMethods _contactMethods = ContactMethods();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class ContactListContainer extends StatelessWidget {
 
     return Container(
       child: StreamBuilder<QuerySnapshot>(
-          stream: _chatMethods.fetchContacts(
+          stream: _contactMethods.fetchContacts(
             userId: userProvider.getUser.uid,
           ),
           builder: (context, snapshot) {

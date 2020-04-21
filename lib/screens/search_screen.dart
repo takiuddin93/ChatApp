@@ -1,3 +1,5 @@
+import 'package:chatapp/provider/user_provider.dart';
+import 'package:chatapp/resources/contact_methods.dart';
 import 'package:chatapp/screens/dashboard.dart';
 import 'package:chatapp/widgets/mainappbar_style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,6 +11,7 @@ import 'package:chatapp/screens/callscreens/pickup/pickup_layout.dart';
 import 'package:chatapp/screens/chatscreens/chat_screen.dart';
 import 'package:chatapp/utils/universal_variables.dart';
 import 'package:chatapp/widgets/custom_tile.dart';
+import 'package:provider/provider.dart';
 
 import 'chatscreens/chat_screen.dart';
 
@@ -19,6 +22,8 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final AuthenticationMethods _authenticationMethods = AuthenticationMethods();
+
+  final ContactMethods _contactMethods = ContactMethods();
 
   List<User> userList;
   String query = "";
@@ -113,7 +118,7 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  buildSuggestions(String query) {
+  buildSuggestions(UserProvider userProvider, String query) {
     final List<User> suggestionList = query.isEmpty
         ? []
         : userList != null
@@ -172,8 +177,8 @@ class _SearchScreenState extends State<SearchScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(4))),
               // color: UniversalVariables.blueColor,
               child: FlatButton(
-                  onPressed: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Dashboard())),
+                  onPressed: () => _contactMethods.addContactToDb(
+                      userProvider.getUser.name, searchedUser.uid),
                   child: Text(
                     "Add Contact",
                     style: TextStyle(
@@ -187,6 +192,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final UserProvider userProvider = Provider.of<UserProvider>(context);
     return PickupLayout(
       scaffold: Scaffold(
         backgroundColor: UniversalVariables.whiteColor,
@@ -196,7 +202,7 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
-          child: buildSuggestions(query),
+          child: buildSuggestions(userProvider, query),
         ),
       ),
     );

@@ -14,7 +14,6 @@ class UniversalVariables {
   static final Color onlineDotColor = Color(0xFF30D158);
   static final Color offlineDotColor = Color(0xFFFF3B30);
   static final Color waitingDotColor = Color(0xFFE19500);
-  static final Color lightBlueColor = Color(0xff0077d7);
   static final Color separatorColor = Color(0xFFDEEEFB);
 
   static final Color gradientColorStart = Color(0xFF1990E4);

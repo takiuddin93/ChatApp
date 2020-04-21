@@ -168,14 +168,14 @@ class _MyDashboardState extends State<MyDashboard> with WidgetsBindingObserver {
                 BottomNavigationBarItem(
                   icon: Icon(Icons.chat,
                       color: (_page == 0)
-                          ? UniversalVariables.lightBlueColor
+                          ? UniversalVariables.blueColor
                           : UniversalVariables.greyColor),
                   title: Text(
                     "",
                     style: TextStyle(
                         fontSize: _labelFontSize,
                         color: (_page == 0)
-                            ? UniversalVariables.lightBlueColor
+                            ? UniversalVariables.blueColor
                             : Colors.grey,
                         height: 0.0),
                   ),
@@ -183,14 +183,14 @@ class _MyDashboardState extends State<MyDashboard> with WidgetsBindingObserver {
                 BottomNavigationBarItem(
                   icon: Icon(Icons.call,
                       color: (_page == 1)
-                          ? UniversalVariables.lightBlueColor
+                          ? UniversalVariables.blueColor
                           : UniversalVariables.greyColor),
                   title: Text(
                     "",
                     style: TextStyle(
                         fontSize: _labelFontSize,
                         color: (_page == 1)
-                            ? UniversalVariables.lightBlueColor
+                            ? UniversalVariables.blueColor
                             : Colors.grey,
                         height: 0.0),
                   ),
@@ -198,14 +198,14 @@ class _MyDashboardState extends State<MyDashboard> with WidgetsBindingObserver {
                 BottomNavigationBarItem(
                   icon: Icon(Icons.contact_phone,
                       color: (_page == 2)
-                          ? UniversalVariables.lightBlueColor
+                          ? UniversalVariables.blueColor
                           : UniversalVariables.greyColor),
                   title: Text(
                     "",
                     style: TextStyle(
                         fontSize: _labelFontSize,
                         color: (_page == 2)
-                            ? UniversalVariables.lightBlueColor
+                            ? UniversalVariables.blueColor
                             : Colors.grey,
                         height: 0.0),
                   ),

@@ -37,7 +37,7 @@ class QuietBox extends StatelessWidget {
               ),
               SizedBox(height: 25),
               FlatButton(
-                color: UniversalVariables.lightBlueColor,
+                color: UniversalVariables.blueColor,
                 child: Text(
                   "START SEARCHING",
                   style: TextStyle(
