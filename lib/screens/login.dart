@@ -1,5 +1,6 @@
 import 'package:chatapp/resources/authentication_methods.dart';
 import 'package:chatapp/screens/dashboard.dart';
+import 'package:chatapp/utils/universal_variables.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: UniversalVariables.appBar,
       body: Stack(
         children: [
           Center(
