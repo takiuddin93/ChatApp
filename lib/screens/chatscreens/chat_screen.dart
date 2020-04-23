@@ -249,8 +249,8 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  Future<http.Response> sendNotification(Message message, User sender) {
-    String receiver = widget.receiver.firebaseToken.toString();
+  Future<http.Response> sendNotification(
+      String message, String sender, String receiver) {
     return http.post(
       'https://fcm.googleapis.com/fcm/send',
       headers: <String, String>{
@@ -261,10 +261,10 @@ class _ChatScreenState extends State<ChatScreen> {
         "to": "$receiver",
         "collapse_key": "type_a",
         "notification": {
-          "sender": "$sender",
-          "title": "$message",
+          "title": "$sender",
+          "body": "$message",
         },
-        "data": {"sender": "$sender", "title": "$message", "sound": "default"}
+        "data": {"title": "$sender", "body": "$message", "sound": "default"}
       }),
     );
   }
@@ -368,7 +368,8 @@ class _ChatScreenState extends State<ChatScreen> {
       textFieldController.text = "";
 
       _chatMethods.addMessageToDb(_message, sender, widget.receiver);
-      sendNotification(_message, sender);
+      sendNotification(_message.message.toString(), sender.name.toString(),
+          widget.receiver.firebaseToken.toString());
     }
 
     return Container(

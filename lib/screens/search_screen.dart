@@ -62,7 +62,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     color: UniversalVariables.whiteColor,
                   ),
                   onPressed: () {
-                    // Navigator.pop(context);
+                    Navigator.pop(context);
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (BuildContext context) => Dashboard()));
                   },

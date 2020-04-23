@@ -1,4 +1,3 @@
-import 'package:chatapp/screens/chatscreens/chat_screen.dart';
 import 'package:chatapp/screens/dashboard.dart';
 import 'package:chatapp/screens/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -34,33 +33,42 @@ class _MainPageState extends State<Main> {
   void initState() {
     super.initState();
     _getdeviceToken();
-    _firebaseMessaging.configure(
-      onMessage: (Map<String, dynamic> message) async {
-        print("onMessage: $message");
-        final notification = message['data'];
-        setState(() {
-          print("sender: " +
-              notification['sender'] +
-              "title: " +
-              notification['title']);
-        });
-      },
-      onLaunch: (Map<String, dynamic> message) async {
-        print("onLaunch: $message");
-        final notification = message['notification'];
-        setState(() {
-          print("sender: " +
-              notification['sender'] +
-              "title: " +
-              notification['title']);
-        });
-      },
-      onResume: (Map<String, dynamic> message) async {
-        print("onResume: $message");
-      },
-    );
-    _firebaseMessaging.requestNotificationPermissions(
-        const IosNotificationSettings(sound: true, badge: true, alert: true));
+    Future.delayed(Duration(milliseconds: 500), () {
+      _firebaseMessaging.configure(
+        onMessage: (Map<String, dynamic> message) async {
+          print("onMessage: $message");
+          final notification = message['data'];
+          setState(() {
+            print("title: " +
+                notification['title'] +
+                "body: " +
+                notification['body']);
+          });
+        },
+        onLaunch: (Map<String, dynamic> message) async {
+          print("onLaunch: $message");
+          final notification = message['notification'];
+          setState(() {
+            print("title: " +
+                notification['title'] +
+                "body: " +
+                notification['body']);
+          });
+        },
+        onResume: (Map<String, dynamic> message) async {
+          print("onResume: $message");
+          final notification = message['notification'];
+          setState(() {
+            print("title: " +
+                notification['title'] +
+                "body: " +
+                notification['body']);
+          });
+        },
+      );
+      _firebaseMessaging.requestNotificationPermissions(
+          const IosNotificationSettings(sound: true, badge: true, alert: true));
+    });
   }
 
   @override
