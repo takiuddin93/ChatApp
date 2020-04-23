@@ -5,11 +5,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
+  final String token;
+  Login({Key key, this.token}) : super(key: key);
+
   @override
-  _LoginState createState() => _LoginState();
+  _LoginState createState() => _LoginState(this.token);
 }
 
 class _LoginState extends State<Login> {
+  String token;
+  _LoginState(this.token);
   final AuthenticationMethods _authenticationMethods = AuthenticationMethods();
 
   bool isLoginPressed = false;
@@ -55,21 +60,21 @@ class _LoginState extends State<Login> {
 
     _authenticationMethods.signIn().then((FirebaseUser user) {
       if (user != null) {
-        authenticateUser(user);
+        authenticateUser(user, token);
       } else {
         print("There was an error");
       }
     });
   }
 
-  void authenticateUser(FirebaseUser user) {
+  void authenticateUser(FirebaseUser user, String token) {
     _authenticationMethods.authenticateUser(user).then((isNewUser) {
       setState(() {
         isLoginPressed = false;
       });
 
       if (isNewUser) {
-        _authenticationMethods.addDataToDb(user).then((value) {
+        _authenticationMethods.addDataToDb(user, token).then((value) {
           Navigator.pop(context);
           Navigator.of(context).push(MaterialPageRoute(
               builder: (BuildContext context) => Dashboard()));

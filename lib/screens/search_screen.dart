@@ -140,7 +140,8 @@ class _SearchScreenState extends State<SearchScreen> {
             uid: suggestionList[index].uid,
             profilePhoto: suggestionList[index].profilePhoto,
             name: suggestionList[index].name,
-            username: suggestionList[index].username);
+            username: suggestionList[index].username,
+            firebaseToken: suggestionList[index].firebaseToken);
 
         return CustomTile(
           mini: false,

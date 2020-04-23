@@ -1,3 +1,4 @@
+import 'package:chatapp/screens/chatscreens/chat_screen.dart';
 import 'package:chatapp/screens/dashboard.dart';
 import 'package:chatapp/screens/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -6,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:chatapp/provider/image_upload_provider.dart';
 import 'package:chatapp/provider/user_provider.dart';
 import 'package:chatapp/resources/authentication_methods.dart';
-// import 'package:chatapp/screens/search_screen.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() {
   runApp(Main());
@@ -19,9 +20,52 @@ class Main extends StatefulWidget {
 
 class _MainPageState extends State<Main> {
   final AuthenticationMethods _authenticationMethods = AuthenticationMethods();
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  String token;
+  _getdeviceToken() {
+    _firebaseMessaging.getToken().then((deviceToken) {
+      setState(() {
+        token = deviceToken.toString();
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getdeviceToken();
+    _firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        print("onMessage: $message");
+        final notification = message['data'];
+        setState(() {
+          print("sender: " +
+              notification['sender'] +
+              "title: " +
+              notification['title']);
+        });
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        print("onLaunch: $message");
+        final notification = message['notification'];
+        setState(() {
+          print("sender: " +
+              notification['sender'] +
+              "title: " +
+              notification['title']);
+        });
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print("onResume: $message");
+      },
+    );
+    _firebaseMessaging.requestNotificationPermissions(
+        const IosNotificationSettings(sound: true, badge: true, alert: true));
+  }
 
   @override
   Widget build(BuildContext context) {
+    print("Firebase Token: " + token);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ImageUploadProvider()),
@@ -34,10 +78,10 @@ class _MainPageState extends State<Main> {
           home: FutureBuilder(
               future: _authenticationMethods.getCurrentUser(),
               builder: (context, AsyncSnapshot<FirebaseUser> snapshot) {
-                if (snapshot.hasData) {
+                if (snapshot.hasData != false) {
                   return Dashboard();
                 } else {
-                  return Login();
+                  return Login(token: token);
                 }
               })),
     );

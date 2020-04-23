@@ -9,7 +9,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthenticationMethods {
   static final Firestore _firestore = Firestore.instance;
-
   final FirebaseAuth _auth = FirebaseAuth.instance;
   GoogleSignIn _googleSignIn = GoogleSignIn();
   static final Firestore firestore = Firestore.instance;
@@ -69,15 +68,17 @@ class AuthenticationMethods {
     return docs.length == 0 ? true : false;
   }
 
-  Future<void> addDataToDb(FirebaseUser currentUser) async {
+  Future<void> addDataToDb(FirebaseUser currentUser, String token) async {
     String username = Utils.getUsername(currentUser.email);
 
     User user = User(
-        uid: currentUser.uid,
-        email: currentUser.email,
-        name: currentUser.displayName,
-        profilePhoto: currentUser.photoUrl,
-        username: username);
+      uid: currentUser.uid,
+      email: currentUser.email,
+      name: currentUser.displayName,
+      profilePhoto: currentUser.photoUrl,
+      firebaseToken: token,
+      username: username,
+    );
 
     firestore
         .collection(USERS_COLLECTION)

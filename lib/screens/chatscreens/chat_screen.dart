@@ -1,6 +1,9 @@
 import 'dart:io';
+import 'dart:convert';
 
 import 'package:chatapp/widgets/chatappbar.dart';
+import 'package:http/http.dart' as http;
+import 'package:chatapp/configs/firebase_configs.dart';
 // import 'package:chatapp/widgets/mainappbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emoji_picker/emoji_picker.dart';
@@ -29,7 +32,7 @@ class ChatScreen extends StatefulWidget {
   ChatScreen({this.receiver});
 
   @override
-  _ChatScreenState createState() => _ChatScreenState();
+  _ChatScreenState createState() => _ChatScreenState(this.receiver);
 }
 
 class _ChatScreenState extends State<ChatScreen> {
@@ -51,6 +54,10 @@ class _ChatScreenState extends State<ChatScreen> {
   bool showEmojiPicker = false;
 
   ImageUploadProvider _imageUploadProvider;
+
+  User receiver;
+
+  _ChatScreenState(this.receiver);
 
   @override
   void initState() {
@@ -242,6 +249,26 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
+  Future<http.Response> sendNotification(Message message, User sender) {
+    String receiver = widget.receiver.firebaseToken.toString();
+    return http.post(
+      'https://fcm.googleapis.com/fcm/send',
+      headers: <String, String>{
+        'Authorization': 'key=$SERVER_KEY',
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        "to": "$receiver",
+        "collapse_key": "type_a",
+        "notification": {
+          "sender": "$sender",
+          "title": "$message",
+        },
+        "data": {"sender": "$sender", "title": "$message", "sound": "default"}
+      }),
+    );
+  }
+
   Widget chatControls() {
     setWritingTo(bool val) {
       setState(() {
@@ -341,6 +368,7 @@ class _ChatScreenState extends State<ChatScreen> {
       textFieldController.text = "";
 
       _chatMethods.addMessageToDb(_message, sender, widget.receiver);
+      sendNotification(_message, sender);
     }
 
     return Container(
