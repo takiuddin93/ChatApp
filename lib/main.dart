@@ -47,7 +47,7 @@ class _MainPageState extends State<Main> {
         },
         onLaunch: (Map<String, dynamic> message) async {
           print("onLaunch: $message");
-          final notification = message['notification'];
+          final notification = message['data'];
           setState(() {
             print("title: " +
                 notification['title'] +
@@ -57,7 +57,7 @@ class _MainPageState extends State<Main> {
         },
         onResume: (Map<String, dynamic> message) async {
           print("onResume: $message");
-          final notification = message['notification'];
+          final notification = message['data'];
           setState(() {
             print("title: " +
                 notification['title'] +

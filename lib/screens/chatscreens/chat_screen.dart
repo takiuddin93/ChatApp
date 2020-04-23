@@ -260,11 +260,17 @@ class _ChatScreenState extends State<ChatScreen> {
       body: jsonEncode(<String, dynamic>{
         "to": "$receiver",
         "collapse_key": "type_a",
+        "priority": "high",
         "notification": {
           "title": "$sender",
           "body": "$message",
         },
-        "data": {"title": "$sender", "body": "$message", "sound": "default"}
+        "data": {
+          "title": "$sender",
+          "body": "$message",
+          "sound": "default",
+          "click_action": "FLUTTER_NOTIFICATION_CLICK",
+        }
       }),
     );
   }
