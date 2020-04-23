@@ -54,6 +54,7 @@ class _MainPageState extends State<Main> {
                 "body: " +
                 notification['body']);
           });
+          print("onLaunch: " + notification['click_action']);
         },
         onResume: (Map<String, dynamic> message) async {
           print("onResume: $message");
@@ -64,6 +65,8 @@ class _MainPageState extends State<Main> {
                 "body: " +
                 notification['body']);
           });
+
+          print("onResume: " + notification['click_action']);
         },
       );
       _firebaseMessaging.requestNotificationPermissions(

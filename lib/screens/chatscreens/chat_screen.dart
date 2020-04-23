@@ -258,6 +258,7 @@ class _ChatScreenState extends State<ChatScreen> {
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, dynamic>{
+        // "message": {
         "to": "$receiver",
         "collapse_key": "type_a",
         "priority": "high",
@@ -271,6 +272,7 @@ class _ChatScreenState extends State<ChatScreen> {
           "sound": "default",
           "click_action": "FLUTTER_NOTIFICATION_CLICK",
         }
+        // }
       }),
     );
   }
