@@ -3,6 +3,7 @@ import 'package:chatapp/screens/dashboard.dart';
 import 'package:chatapp/utils/universal_variables.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Login extends StatefulWidget {
   final String token;
@@ -21,11 +22,21 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    Size media = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: UniversalVariables.appBar,
+      backgroundColor: UniversalVariables.whiteColor,
       body: Stack(
         children: [
-          Center(
+          Positioned(
+            top: media.height * 0.16,
+            left: media.width * 0.10,
+            right: media.width * 0.10,
+            child: SvgPicture.asset('assets/svgs/chat_app_logo.svg'),
+          ),
+          Positioned(
+            top: media.height * 0.64,
+            left: media.width * 0.20,
+            right: media.width * 0.20,
             child: loginButon(),
           ),
           isLoginPressed
@@ -40,14 +51,30 @@ class _LoginState extends State<Login> {
 
   Widget loginButon() {
     return FlatButton(
-      padding: EdgeInsets.all(32),
-      child: Text(
-        "Sign-In with Gooogle",
-        style: TextStyle(
-            fontSize: 32, fontWeight: FontWeight.w800, letterSpacing: 1.6),
+      color: UniversalVariables.blueColor,
+      padding: EdgeInsets.all(1),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            flex: 2,
+            child:
+                SvgPicture.asset('assets/svgs/btn_google_light_normal_ios.svg'),
+          ),
+          Expanded(
+            flex: 8,
+            child: Text(
+              "Sign-In with Gooogle",
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 1.6,
+                  color: UniversalVariables.whiteColor),
+            ),
+          ),
+        ],
       ),
       onPressed: () => performLogin(),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2.0)),
     );
   }
 
