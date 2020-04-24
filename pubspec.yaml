@@ -26,6 +26,7 @@ dependencies:
   agora_rtc_engine: ^1.0.10
   permission_handler: ^3.0.0
   wakelock: ^0.1.4+1
+  flutter_svg: ^0.17.4
 
 dev_dependencies:
   flutter_test:
@@ -36,9 +37,9 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - images/
+    - svgs/
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
