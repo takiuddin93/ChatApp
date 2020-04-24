@@ -42,7 +42,7 @@ class _LoginState extends State<Login> {
     return FlatButton(
       padding: EdgeInsets.all(32),
       child: Text(
-        "Login",
+        "Sign-In with Gooogle",
         style: TextStyle(
             fontSize: 32, fontWeight: FontWeight.w800, letterSpacing: 1.6),
       ),
