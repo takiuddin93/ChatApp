@@ -16,7 +16,7 @@
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <application
-        android:name="io.flutter.app.FlutterApplication"
+        android:name=".FlutterApplication"
         android:label="ChatApp"
         android:icon="@drawable/ic_chat_app_logo">
         <activity
@@ -45,6 +45,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <service
+            android:name=".services.MyFirebaseMessagingService"
+            android:exported="false"
+            tools:ignore="InnerclassSeparator">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data
