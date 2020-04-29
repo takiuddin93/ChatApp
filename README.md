@@ -6,6 +6,10 @@ A new Flutter project.
 
 A Flutter Chat Application, using Firebase for Google Sign In/Sign Up, exchange texts, emojis, and images. Integrated Agora Sdk for communicating over video calls. A little tweaking to communicate over voice calls only.
 
+## TODO:
+- Enable Group Chats
+- Enable Group Calls
+
 ## For Beginners
 
 A few resources to get you started if this is your first Flutter project:
