@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:chatapp/constants/strings.dart';
 import 'package:chatapp/models/group.dart';
@@ -19,7 +21,7 @@ class GroupMethods {
       _userCollection
           .document(of)
           .collection(GROUPS_COLLECTION)
-          .document(forContact);
+          .document("group_" + Random().nextInt(1000).toString());
 
   addToGroups({String senderId, String receiverId}) async {
     Timestamp currentTime = Timestamp.now();
@@ -29,10 +31,7 @@ class GroupMethods {
   }
 
   Future<void> addToSenderGroups(
-    String senderId,
-    String receiverId,
-    currentTime,
-  ) async {
+      String senderId, String receiverId, currentTime) async {
     DocumentSnapshot senderSnapshot =
         await getGroupsDocument(of: senderId, forContact: receiverId).get();
 
@@ -40,7 +39,7 @@ class GroupMethods {
       //does not exists
       Group receiverGroup = Group(
         uid: receiverId,
-        addedOn: currentTime,
+        createdOn: currentTime,
       );
 
       var receiverMap = receiverGroup.toMap(receiverGroup);
@@ -62,7 +61,7 @@ class GroupMethods {
       //does not exists
       Group senderGroup = Group(
         uid: senderId,
-        addedOn: currentTime,
+        createdOn: currentTime,
       );
 
       var senderMap = senderGroup.toMap(senderGroup);
