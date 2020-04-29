@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:chatapp/models/contact.dart';
+import 'package:chatapp/models/group.dart';
 import 'package:chatapp/provider/user_provider.dart';
 import 'package:chatapp/resources/group_methods.dart';
 import 'package:chatapp/screens/callscreens/pickup/pickup_layout.dart';
@@ -40,15 +40,15 @@ class GroupListContainer extends StatelessWidget {
               var docList = snapshot.data.documents;
 
               if (docList.isEmpty) {
-                return QuietBox();
+                return GroupQuietBox();
               }
               return ListView.builder(
                 padding: EdgeInsets.all(10),
                 itemCount: docList.length,
                 itemBuilder: (context, index) {
-                  Contact contact = Contact.fromMap(docList[index].data);
+                  Group group = Group.fromMap(docList[index].data);
 
-                  return GroupListView(contact);
+                  return GroupListView(group);
                 },
               );
             }

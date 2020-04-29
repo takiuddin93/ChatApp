@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:chatapp/constants/strings.dart';
-import 'package:chatapp/models/contact.dart';
+import 'package:chatapp/models/group.dart';
 import 'package:chatapp/models/user.dart';
 
 class GroupMethods {
@@ -8,6 +8,8 @@ class GroupMethods {
 
   final CollectionReference _userCollection =
       _firestore.collection(USERS_COLLECTION);
+  final CollectionReference _groupCollection =
+      _firestore.collection(GROUPS_COLLECTION);
 
   Future<void> addGroupToDb(User sender, User receiver) async {
     addToGroups(senderId: sender.uid, receiverId: receiver.uid);
@@ -36,12 +38,12 @@ class GroupMethods {
 
     if (!senderSnapshot.exists) {
       //does not exists
-      Contact receiverContact = Contact(
+      Group receiverGroup = Group(
         uid: receiverId,
         addedOn: currentTime,
       );
 
-      var receiverMap = receiverContact.toMap(receiverContact);
+      var receiverMap = receiverGroup.toMap(receiverGroup);
 
       await getGroupsDocument(of: senderId, forContact: receiverId)
           .setData(receiverMap);
@@ -58,12 +60,12 @@ class GroupMethods {
 
     if (!receiverSnapshot.exists) {
       //does not exists
-      Contact senderContact = Contact(
+      Group senderGroup = Group(
         uid: senderId,
         addedOn: currentTime,
       );
 
-      var senderMap = senderContact.toMap(senderContact);
+      var senderMap = senderGroup.toMap(senderGroup);
 
       await getGroupsDocument(of: receiverId, forContact: senderId)
           .setData(senderMap);

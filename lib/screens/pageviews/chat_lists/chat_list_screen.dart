@@ -40,7 +40,7 @@ class ChatListContainer extends StatelessWidget {
               var docList = snapshot.data.documents;
 
               if (docList.isEmpty) {
-                return QuietBox();
+                return ContactQuietBox();
               }
               return ListView.builder(
                 padding: EdgeInsets.all(10),

@@ -1,7 +1,7 @@
 import 'package:chatapp/utils/universal_variables.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:chatapp/models/contact.dart';
+import 'package:chatapp/models/group.dart';
 import 'package:chatapp/models/user.dart';
 import 'package:chatapp/provider/user_provider.dart';
 import 'package:chatapp/resources/authentication_methods.dart';
@@ -15,15 +15,15 @@ import 'package:chatapp/widgets/custom_tile.dart';
 import 'last_message_container.dart';
 
 class GroupListView extends StatelessWidget {
-  final Contact contact;
+  final Group group;
   final AuthenticationMethods _authenticationMethods = AuthenticationMethods();
 
-  GroupListView(this.contact);
+  GroupListView(this.group);
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<User>(
-      future: _authenticationMethods.getUserDetailsById(contact.uid),
+      future: _authenticationMethods.getUserDetailsById(group.uid),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           User user = snapshot.data;
