@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:chatapp/provider/user_provider.dart';
 import 'package:chatapp/screens/callscreens/pickup/pickup_layout.dart';
 import 'package:chatapp/screens/pageviews/chat_lists/chat_list_screen.dart';
+import 'package:chatapp/screens/pageviews/group_lists/group_list_screen.dart';
 import 'package:chatapp/utils/universal_variables.dart';
 
 void main() async {
@@ -146,13 +147,7 @@ class _MyDashboardState extends State<MyDashboard> with WidgetsBindingObserver {
             Container(
               child: ChatListScreen(),
             ),
-            Center(
-                child: Text(
-              "Group Chats",
-              style: TextStyle(
-                color: UniversalVariables.blueColor,
-              ),
-            )),
+            Container(child: GroupListScreen()),
             Center(
                 child: Text(
               "Call Logs",
@@ -160,7 +155,7 @@ class _MyDashboardState extends State<MyDashboard> with WidgetsBindingObserver {
                 color: UniversalVariables.blueColor,
               ),
             )),
-            Center(child: ContactListScreen()),
+            Container(child: ContactListScreen()),
           ],
           controller: pageController,
           onPageChanged: onPageChanged,
@@ -189,7 +184,7 @@ class _MyDashboardState extends State<MyDashboard> with WidgetsBindingObserver {
                   ),
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.group_add,
+                  icon: Icon(Icons.group,
                       color: (_page == 1)
                           ? UniversalVariables.blueColor
                           : UniversalVariables.greyColor),

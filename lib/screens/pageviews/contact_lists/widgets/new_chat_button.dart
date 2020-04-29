@@ -1,4 +1,4 @@
-import 'package:chatapp/screens/search_screen.dart';
+import 'package:chatapp/screens/contact_search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:chatapp/utils/universal_variables.dart';
 
@@ -9,7 +9,7 @@ class NewChatButton extends StatelessWidget {
       onPressed: () {
         Navigator.pop(context);
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (BuildContext context) => SearchScreen()));
+            builder: (BuildContext context) => ContactSearchScreen()));
       },
       child: Container(
         decoration: BoxDecoration(

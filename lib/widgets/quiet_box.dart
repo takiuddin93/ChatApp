@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:chatapp/screens/search_screen.dart';
+import 'package:chatapp/screens/contact_search_screen.dart';
 import 'package:chatapp/utils/universal_variables.dart';
 
 class QuietBox extends StatelessWidget {
@@ -47,7 +47,7 @@ class QuietBox extends StatelessWidget {
                 onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SearchScreen(),
+                    builder: (context) => ContactSearchScreen(),
                   ),
                 ),
               ),

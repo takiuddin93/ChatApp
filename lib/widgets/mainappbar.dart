@@ -1,7 +1,7 @@
 import 'package:chatapp/resources/authentication_methods.dart';
 import 'package:chatapp/screens/login.dart';
 import 'package:chatapp/widgets/user_circle.dart';
-import 'package:chatapp/screens/search_screen.dart';
+import 'package:chatapp/screens/contact_search_screen.dart';
 import 'package:chatapp/utils/universal_variables.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -50,19 +50,19 @@ class MainAppBar extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  flex: 6,
+                  flex: 7,
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: _buildLabel(context),
                   ),
                 ),
-                Expanded(
-                  flex: 1,
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: _buildsearch(context),
-                  ),
-                ),
+                // Expanded(
+                //   flex: 1,
+                //   child: Align(
+                //     alignment: Alignment.centerRight,
+                //     child: _buildsearch(context),
+                //   ),
+                // ),
                 Expanded(
                   flex: 1,
                   child: Align(
@@ -157,7 +157,7 @@ class MainAppBar extends StatelessWidget {
         onPressed: () {
           Navigator.pop(context);
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) => SearchScreen()));
+              builder: (BuildContext context) => ContactSearchScreen()));
         },
       ),
     );
