@@ -1,40 +1,38 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:chatapp/constants/strings.dart';
 import 'package:chatapp/models/contact.dart';
-import 'package:chatapp/models/message.dart';
 import 'package:chatapp/models/user.dart';
 
-class ContactMethods {
+class GroupMethods {
   static final Firestore _firestore = Firestore.instance;
 
   final CollectionReference _userCollection =
       _firestore.collection(USERS_COLLECTION);
 
-  Future<void> addContactToDb(User sender, User receiver) async {
-    addToContacts(senderId: sender.uid, receiverId: receiver.uid);
+  Future<void> addGroupToDb(User sender, User receiver) async {
+    addToGroups(senderId: sender.uid, receiverId: receiver.uid);
   }
 
-  DocumentReference getContactsDocument({String of, String forContact}) =>
+  DocumentReference getGroupsDocument({String of, String forContact}) =>
       _userCollection
           .document(of)
-          .collection(CONTACTS_COLLECTION)
+          .collection(GROUPS_COLLECTION)
           .document(forContact);
 
-  addToContacts({String senderId, String receiverId}) async {
+  addToGroups({String senderId, String receiverId}) async {
     Timestamp currentTime = Timestamp.now();
 
-    await addToSenderContacts(senderId, receiverId, currentTime);
-    await addToReceiverContacts(senderId, receiverId, currentTime);
+    await addToSenderGroups(senderId, receiverId, currentTime);
+    await addToReceiverGroups(senderId, receiverId, currentTime);
   }
 
-  Future<void> addToSenderContacts(
+  Future<void> addToSenderGroups(
     String senderId,
     String receiverId,
     currentTime,
   ) async {
     DocumentSnapshot senderSnapshot =
-        await getContactsDocument(of: senderId, forContact: receiverId).get();
+        await getGroupsDocument(of: senderId, forContact: receiverId).get();
 
     if (!senderSnapshot.exists) {
       //does not exists
@@ -45,18 +43,18 @@ class ContactMethods {
 
       var receiverMap = receiverContact.toMap(receiverContact);
 
-      await getContactsDocument(of: senderId, forContact: receiverId)
+      await getGroupsDocument(of: senderId, forContact: receiverId)
           .setData(receiverMap);
     }
   }
 
-  Future<void> addToReceiverContacts(
+  Future<void> addToReceiverGroups(
     String senderId,
     String receiverId,
     currentTime,
   ) async {
     DocumentSnapshot receiverSnapshot =
-        await getContactsDocument(of: receiverId, forContact: senderId).get();
+        await getGroupsDocument(of: receiverId, forContact: senderId).get();
 
     if (!receiverSnapshot.exists) {
       //does not exists
@@ -67,13 +65,13 @@ class ContactMethods {
 
       var senderMap = senderContact.toMap(senderContact);
 
-      await getContactsDocument(of: receiverId, forContact: senderId)
+      await getGroupsDocument(of: receiverId, forContact: senderId)
           .setData(senderMap);
     }
   }
 
-  Stream<QuerySnapshot> fetchContacts({String userId}) => _userCollection
+  Stream<QuerySnapshot> fetchGroups({String userId}) => _userCollection
       .document(userId)
-      .collection(CONTACTS_COLLECTION)
+      .collection(GROUPS_COLLECTION)
       .snapshots();
 }
