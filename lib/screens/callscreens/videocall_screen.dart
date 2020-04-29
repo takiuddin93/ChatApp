@@ -51,9 +51,9 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
     await _initAgoraRtcEngine();
     _addAgoraEventHandlers();
     await AgoraRtcEngine.enableWebSdkInteroperability(true);
-    await AgoraRtcEngine.setParameters('''{\"che.video.lowBitRateStreamParameter\":{\"width\":320,\"height\":180,\"frameRate\":15,\"bitRate\":140}}''');
+    await AgoraRtcEngine.setParameters(
+        '''{\"che.video.lowBitRateStreamParameter\":{\"width\":320,\"height\":180,\"frameRate\":15,\"bitRate\":140}}''');
     await AgoraRtcEngine.joinChannel(null, widget.call.channelId, null, 0);
-    
   }
 
   addPostFrameCallback() {
@@ -194,6 +194,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
   /// Video view row wrapper
   Widget _expandedVideoRow(List<Widget> views) {
     final wrappedViews = views.map<Widget>(_videoView).toList();
+    print("Expanded Wrapped Views: " + wrappedViews.length.toString());
     return Expanded(
       child: Row(
         children: wrappedViews,
@@ -206,11 +207,13 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
     final views = _getRenderViews();
     switch (views.length) {
       case 1:
+        print("Case: " + views.length.toString());
         return Container(
             child: Column(
           children: <Widget>[_videoView(views[0])],
         ));
       case 2:
+        print("Case: " + views.length.toString());
         return Container(
             child: Column(
           children: <Widget>[
@@ -219,6 +222,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
           ],
         ));
       case 3:
+        print("Case: " + views.length.toString());
         return Container(
             child: Column(
           children: <Widget>[
@@ -227,15 +231,18 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
           ],
         ));
       case 4:
+        print("Case: " + views.length.toString());
         return Container(
             child: Column(
           children: <Widget>[
             _expandedVideoRow(views.sublist(0, 2)),
-            _expandedVideoRow(views.sublist(2, 4))
+            _expandedVideoRow(views.sublist(2, 3)),
+            _expandedVideoRow(views.sublist(3, 4))
           ],
         ));
       default:
     }
+    print("Case: " + views.length.toString());
     return Container();
   }
 

@@ -519,6 +519,61 @@ class _ChatScreenState extends State<ChatScreen> {
       actions: <Widget>[
         IconButton(
           icon: Icon(
+            Icons.add_circle,
+          ),
+          onPressed: () {
+            String _alertdialogTitle,
+                _alertdialogDescription,
+                _alertdialogOkButton;
+            _alertdialogTitle = 'Add people to chat';
+            _alertdialogDescription =
+                'This feature has not been implemented yet!';
+            _alertdialogOkButton = 'Ok';
+            showDialog<void>(
+              context: context,
+              barrierDismissible: false, // user must tap button!
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  backgroundColor: UniversalVariables.separatorColor,
+                  title: Text(
+                    _alertdialogTitle,
+                    style: TextStyle(
+                      color: UniversalVariables.blueColor,
+                    ),
+                  ),
+                  content: SingleChildScrollView(
+                    child: ListBody(
+                      children: <Widget>[
+                        Text(
+                          _alertdialogDescription,
+                          style: TextStyle(
+                            color: UniversalVariables.blueColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  actions: <Widget>[
+                    FlatButton(
+                      child: Text(
+                        _alertdialogOkButton,
+                        style: TextStyle(
+                          color: UniversalVariables.blueColor,
+                        ),
+                      ),
+                      onPressed: () {
+                        _authenticationMethods.signOut();
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+        ),
+        IconButton(
+          icon: Icon(
             Icons.video_call,
           ),
           onPressed: () async =>

@@ -12,13 +12,6 @@ class ContactMethods {
       _firestore.collection(USERS_COLLECTION);
 
   Future<void> addContactToDb(User sender, User receiver) async {
-    // var map = sender.toMap();
-
-    // await _messageCollection
-    //     .document(message.senderId)
-    //     .collection(message.receiverId)
-    //     .add(map);
-
     addToContacts(senderId: sender.uid, receiverId: receiver.uid);
   }
 

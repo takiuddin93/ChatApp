@@ -148,6 +148,13 @@ class _MyDashboardState extends State<MyDashboard> with WidgetsBindingObserver {
             ),
             Center(
                 child: Text(
+              "Group Chats",
+              style: TextStyle(
+                color: UniversalVariables.blueColor,
+              ),
+            )),
+            Center(
+                child: Text(
               "Call Logs",
               style: TextStyle(
                 color: UniversalVariables.blueColor,
@@ -163,6 +170,7 @@ class _MyDashboardState extends State<MyDashboard> with WidgetsBindingObserver {
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 0),
             child: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
               backgroundColor: UniversalVariables.whiteColor,
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
@@ -175,6 +183,21 @@ class _MyDashboardState extends State<MyDashboard> with WidgetsBindingObserver {
                     style: TextStyle(
                         fontSize: _labelFontSize,
                         color: (_page == 0)
+                            ? UniversalVariables.blueColor
+                            : Colors.grey,
+                        height: 0.0),
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.group_add,
+                      color: (_page == 1)
+                          ? UniversalVariables.blueColor
+                          : UniversalVariables.greyColor),
+                  title: Text(
+                    "",
+                    style: TextStyle(
+                        fontSize: _labelFontSize,
+                        color: (_page == 1)
                             ? UniversalVariables.blueColor
                             : Colors.grey,
                         height: 0.0),
