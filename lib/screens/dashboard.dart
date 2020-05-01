@@ -174,13 +174,14 @@ class _MyDashboardState extends State<MyDashboard> with WidgetsBindingObserver {
                           ? UniversalVariables.blueColor
                           : UniversalVariables.greyColor),
                   title: Text(
-                    "",
+                    "Chats",
                     style: TextStyle(
-                        fontSize: _labelFontSize,
-                        color: (_page == 0)
-                            ? UniversalVariables.blueColor
-                            : Colors.grey,
-                        height: 0.0),
+                      fontSize: _labelFontSize,
+                      color: (_page == 0)
+                          ? UniversalVariables.blueColor
+                          : Colors.grey,
+                      // height: 0.0
+                    ),
                   ),
                 ),
                 BottomNavigationBarItem(
@@ -189,13 +190,14 @@ class _MyDashboardState extends State<MyDashboard> with WidgetsBindingObserver {
                           ? UniversalVariables.blueColor
                           : UniversalVariables.greyColor),
                   title: Text(
-                    "",
+                    "Groups",
                     style: TextStyle(
-                        fontSize: _labelFontSize,
-                        color: (_page == 1)
-                            ? UniversalVariables.blueColor
-                            : Colors.grey,
-                        height: 0.0),
+                      fontSize: _labelFontSize,
+                      color: (_page == 1)
+                          ? UniversalVariables.blueColor
+                          : Colors.grey,
+                      // height: 0.0
+                    ),
                   ),
                 ),
                 BottomNavigationBarItem(
@@ -204,13 +206,14 @@ class _MyDashboardState extends State<MyDashboard> with WidgetsBindingObserver {
                           ? UniversalVariables.blueColor
                           : UniversalVariables.greyColor),
                   title: Text(
-                    "",
+                    "Calls",
                     style: TextStyle(
-                        fontSize: _labelFontSize,
-                        color: (_page == 1)
-                            ? UniversalVariables.blueColor
-                            : Colors.grey,
-                        height: 0.0),
+                      fontSize: _labelFontSize,
+                      color: (_page == 1)
+                          ? UniversalVariables.blueColor
+                          : Colors.grey,
+                      // height: 0.0
+                    ),
                   ),
                 ),
                 BottomNavigationBarItem(
@@ -219,13 +222,14 @@ class _MyDashboardState extends State<MyDashboard> with WidgetsBindingObserver {
                           ? UniversalVariables.blueColor
                           : UniversalVariables.greyColor),
                   title: Text(
-                    "",
+                    "Contacts",
                     style: TextStyle(
-                        fontSize: _labelFontSize,
-                        color: (_page == 2)
-                            ? UniversalVariables.blueColor
-                            : Colors.grey,
-                        height: 0.0),
+                      fontSize: _labelFontSize,
+                      color: (_page == 2)
+                          ? UniversalVariables.blueColor
+                          : Colors.grey,
+                      // height: 0.0
+                    ),
                   ),
                 ),
               ],
