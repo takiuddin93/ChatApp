@@ -5,11 +5,10 @@ import 'package:chatapp/models/group.dart';
 import 'package:chatapp/models/user.dart';
 import 'package:chatapp/provider/user_provider.dart';
 import 'package:chatapp/resources/authentication_methods.dart';
-import 'package:chatapp/resources/chat_methods.dart';
+import 'package:chatapp/resources/group_methods.dart';
 import 'package:chatapp/screens/chatscreens/chat_screen.dart';
 import 'package:chatapp/screens/chatscreens/widgets/cached_image.dart';
 import 'package:chatapp/screens/pageviews/chat_lists/widgets/online_dot_indicator.dart';
-// import 'package:chatapp/utils/universal_variables.dart';
 import 'package:chatapp/widgets/custom_tile.dart';
 
 import 'last_message_container.dart';
@@ -42,7 +41,7 @@ class GroupListView extends StatelessWidget {
 
 class ViewLayout extends StatelessWidget {
   final User contact;
-  final ChatMethods _chatMethods = ChatMethods();
+  final GroupMethods _groupMethods = GroupMethods();
 
   ViewLayout({
     @required this.contact,
@@ -74,7 +73,7 @@ class ViewLayout extends StatelessWidget {
       subtitle: Padding(
         padding: EdgeInsets.only(left: 8, top: 0, right: 0, bottom: 0),
         child: LastMessageContainer(
-          stream: _chatMethods.fetchLastMessageBetween(
+          stream: _groupMethods.fetchLastMessageBetween(
             senderId: userProvider.getUser.uid,
             receiverId: contact.uid,
           ),

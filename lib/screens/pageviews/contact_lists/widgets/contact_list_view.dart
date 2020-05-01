@@ -5,7 +5,7 @@ import 'package:chatapp/models/contact.dart';
 import 'package:chatapp/models/user.dart';
 import 'package:chatapp/provider/user_provider.dart';
 import 'package:chatapp/resources/authentication_methods.dart';
-import 'package:chatapp/resources/contact_methods.dart';
+// import 'package:chatapp/resources/contact_methods.dart';
 import 'package:chatapp/screens/chatscreens/chat_screen.dart';
 import 'package:chatapp/screens/chatscreens/widgets/cached_image.dart';
 import 'package:chatapp/screens/pageviews/contact_lists/widgets/online_dot_indicator.dart';
@@ -39,7 +39,6 @@ class ContactListView extends StatelessWidget {
 
 class ViewLayout extends StatelessWidget {
   final User contact;
-  final ContactMethods _contactMethods = ContactMethods();
 
   ViewLayout({
     @required this.contact,
@@ -47,8 +46,6 @@ class ViewLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UserProvider userProvider = Provider.of<UserProvider>(context);
-
     return CustomTile(
       mini: false,
       onTap: () => Navigator.push(

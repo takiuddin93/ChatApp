@@ -4,7 +4,6 @@ import 'package:chatapp/screens/dashboard.dart';
 import 'package:chatapp/widgets/mainappbar_style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:chatapp/models/user.dart';
 import 'package:chatapp/resources/authentication_methods.dart';
 import 'package:chatapp/screens/callscreens/pickup/pickup_layout.dart';

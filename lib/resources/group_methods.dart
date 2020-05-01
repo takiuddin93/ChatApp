@@ -1,5 +1,5 @@
 import 'dart:math';
-
+import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:chatapp/constants/strings.dart';
 import 'package:chatapp/models/group.dart';
@@ -7,6 +7,9 @@ import 'package:chatapp/models/user.dart';
 
 class GroupMethods {
   static final Firestore _firestore = Firestore.instance;
+
+  final CollectionReference _messageCollection =
+      _firestore.collection(MESSAGES_COLLECTION);
 
   final CollectionReference _userCollection =
       _firestore.collection(USERS_COLLECTION);
@@ -75,4 +78,14 @@ class GroupMethods {
       .document(userId)
       .collection(GROUPS_COLLECTION)
       .snapshots();
+
+  Stream<QuerySnapshot> fetchLastMessageBetween({
+    @required String senderId,
+    @required String receiverId,
+  }) =>
+      _messageCollection
+          .document(senderId)
+          .collection(receiverId)
+          .orderBy("timestamp")
+          .snapshots();
 }
