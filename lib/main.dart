@@ -23,8 +23,8 @@ class _MainPageState extends State<Main> {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   static const platform = const MethodChannel('TokenChannel');
   String token;
-  _getdeviceToken() {
-    _firebaseMessaging.getToken().then((deviceToken) {
+  _getdeviceToken() async {
+    await _firebaseMessaging.getToken().then((deviceToken) {
       setState(() {
         token = deviceToken.toString();
       });

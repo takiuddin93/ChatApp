@@ -1,3 +1,4 @@
+import 'package:chatapp/screens/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:chatapp/provider/user_provider.dart';
@@ -15,7 +16,10 @@ class UserCircle extends StatelessWidget {
     final UserProvider userProvider = Provider.of<UserProvider>(context);
 
     return GestureDetector(
-        onTap: onTap,
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (BuildContext context) => UserProfile()));
+        },
         child: Container(
           height: 40,
           width: 40,

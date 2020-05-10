@@ -27,6 +27,10 @@ class MainAppBar extends StatelessWidget {
 
   static final AuthenticationMethods _authenticationMethods =
       AuthenticationMethods();
+  static String alertdialogTitle,
+      alertdialogDescription,
+      alertdialogOkButton,
+      alertdialogCancelButton;
 
   @override
   Widget build(BuildContext context) {
@@ -79,25 +83,22 @@ class MainAppBar extends StatelessWidget {
   }
 
   Builder _buildleading(BuildContext context) {
-    IconData _iconData;
+    IconData _leadingiconData;
     switch (back.toString()) {
       case "dashboard":
         {
           return Builder(
-            builder: (context) => UserCircle(
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => UserProfile())),
-            ),
+            builder: (context) => UserCircle(),
           );
         }
       case "chatscreen":
         {
-          _iconData = Icons.arrow_back;
+          _leadingiconData = Icons.arrow_back;
         }
         break;
       case "userprofile":
         {
-          _iconData = Icons.arrow_back;
+          _leadingiconData = Icons.arrow_back;
         }
         break;
       default:
@@ -112,7 +113,7 @@ class MainAppBar extends StatelessWidget {
       builder: (context) => IconButton(
         color: green,
         icon: new Icon(
-          _iconData,
+          _leadingiconData,
           color: white,
         ),
         onPressed: () {
@@ -164,58 +165,116 @@ class MainAppBar extends StatelessWidget {
   }
 
   Builder _buildaction(BuildContext context) {
-    String _alertdialogTitle, _alertdialogDescription, _alertdialogOkButton;
-    _alertdialogTitle = 'Notification';
-    _alertdialogDescription = 'This feature has not been implemented yet!';
-    _alertdialogOkButton = 'Ok';
+    IconData _actioniconData;
+    switch (back.toString()) {
+      case "dashboard":
+        {
+          _actioniconData = Icons.notifications;
+          alertdialogTitle = 'Notifications';
+          alertdialogDescription = 'This feature has not been implemented yet!';
+          alertdialogOkButton = '';
+          alertdialogCancelButton = 'Cancel';
+        }
+        break;
+      case "userprofile":
+        {
+          _actioniconData = Icons.exit_to_app;
+          alertdialogTitle = 'Logout';
+          alertdialogDescription = 'Are you sure you want to logout?';
+          alertdialogOkButton = 'Ok';
+          alertdialogCancelButton = 'Cancel';
+        }
+        break;
+      default:
+        {
+          _actioniconData = Icons.notifications;
+
+          alertdialogTitle = 'Notifications';
+          alertdialogDescription = 'This feature has not been implemented yet!';
+          alertdialogOkButton = '';
+          alertdialogCancelButton = 'Cancel';
+        }
+        break;
+    }
     return Builder(
       builder: (context) => IconButton(
         color: UniversalVariables.whiteColor,
-        icon: new Icon(Icons.notifications),
+        icon: new Icon(_actioniconData),
         onPressed: () {
-          showDialog<void>(
-            context: context,
-            barrierDismissible: false, // user must tap button!
-            builder: (BuildContext context) {
-              return AlertDialog(
-                backgroundColor: UniversalVariables.separatorColor,
-                title: Text(
-                  _alertdialogTitle,
+          dialogBox(context,
+              alertdialogTitle: alertdialogTitle,
+              alertdialogDescription: alertdialogDescription,
+              alertdialogCancelButton: alertdialogCancelButton,
+              alertdialogOkButton: alertdialogOkButton);
+        },
+      ),
+    );
+  }
+
+  void dialogBox(BuildContext context,
+      {String alertdialogTitle,
+      String alertdialogDescription,
+      String alertdialogCancelButton,
+      String alertdialogOkButton}) {
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: UniversalVariables.separatorColor,
+          title: Text(
+            alertdialogTitle,
+            style: TextStyle(
+              color: UniversalVariables.blueColor,
+            ),
+          ),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(
+                  alertdialogDescription,
                   style: TextStyle(
                     color: UniversalVariables.blueColor,
                   ),
                 ),
-                content: SingleChildScrollView(
-                  child: ListBody(
-                    children: <Widget>[
-                      Text(
-                        _alertdialogDescription,
-                        style: TextStyle(
-                          color: UniversalVariables.blueColor,
-                        ),
-                      ),
-                    ],
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+                child: Text(
+                  alertdialogOkButton,
+                  style: TextStyle(
+                    color: UniversalVariables.blueColor,
                   ),
                 ),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text(
-                      _alertdialogOkButton,
-                      style: TextStyle(
-                        color: UniversalVariables.blueColor,
-                      ),
-                    ),
-                    onPressed: () {
-                      _authenticationMethods.signOut();
-                      Navigator.pop(context);
-                    },
+                onPressed: () async {
+                  if (alertdialogOkButton == "Ok") {
+                    final bool isLoggedOut =
+                        await _authenticationMethods.signOut();
+                    if (isLoggedOut) {
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => Login()),
+                          (Route<dynamic> route) => false);
+                    }
+                  } else {
+                    Navigator.pop(context);
+                  }
+                }),
+            FlatButton(
+                child: Text(
+                  alertdialogCancelButton,
+                  style: TextStyle(
+                    color: UniversalVariables.blueColor,
                   ),
-                ],
-              );
-            },
-          );
-        },
-      ),
+                ),
+                onPressed: () async {
+                  Navigator.pop(context);
+                }),
+          ],
+        );
+      },
     );
   }
 

@@ -79,8 +79,6 @@ class _LoginState extends State<Login> {
   }
 
   void performLogin() {
-    print("tring to perform login");
-
     setState(() {
       isLoginPressed = true;
     });
