@@ -26,17 +26,19 @@ class UserProfile extends StatelessWidget {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(color: UniversalVariables.whiteColor),
-      child: Column(
-        children: <Widget>[
-          PreferredSize(
-            child: MainAppBar(
-                title: userProvider.getUser.name, back: "userprofile"),
-            preferredSize: Size.fromHeight(media.height),
-          ),
-          UserDetailsBody(),
-        ],
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(color: UniversalVariables.whiteColor),
+        child: Column(
+          children: <Widget>[
+            PreferredSize(
+              child: MainAppBar(
+                  title: userProvider.getUser.name, back: "userprofile"),
+              preferredSize: Size.fromHeight(media.height),
+            ),
+            UserDetailsBody(),
+          ],
+        ),
       ),
     );
   }
@@ -55,7 +57,7 @@ class UserDetailsBody extends StatelessWidget {
           CachedImage(
             user.profilePhoto,
             isRound: true,
-            radius: 50,
+            radius: 80,
           ),
           SizedBox(width: 15),
           Column(
