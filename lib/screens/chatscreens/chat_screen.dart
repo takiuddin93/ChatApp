@@ -251,6 +251,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   Future<http.Response> sendNotification(
       String message, String sender, String receiver) {
+    print("Firebase Token: " + receiver);
     return http.post(
       'https://fcm.googleapis.com/fcm/send',
       headers: <String, String>{

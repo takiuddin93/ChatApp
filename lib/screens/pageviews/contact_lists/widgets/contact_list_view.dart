@@ -1,9 +1,7 @@
 import 'package:chatapp/utils/universal_variables.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:chatapp/models/contact.dart';
 import 'package:chatapp/models/user.dart';
-import 'package:chatapp/provider/user_provider.dart';
 import 'package:chatapp/resources/authentication_methods.dart';
 // import 'package:chatapp/resources/contact_methods.dart';
 import 'package:chatapp/screens/chatscreens/chat_screen.dart';

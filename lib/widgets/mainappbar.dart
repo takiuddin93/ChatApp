@@ -6,7 +6,6 @@ import 'package:chatapp/utils/universal_variables.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:chatapp/screens/dashboard.dart';
-import 'package:chatapp/screens/user_profile.dart';
 import 'package:chatapp/widgets/mainappbar_style.dart';
 
 Color green = Color(0xFF6B8449);

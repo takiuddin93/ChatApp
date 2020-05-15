@@ -4,27 +4,18 @@ import 'package:chatapp/provider/user_provider.dart';
 import 'package:chatapp/widgets/mainappbar.dart';
 import 'package:chatapp/utils/universal_variables.dart';
 import 'package:chatapp/screens/chatscreens/widgets/cached_image.dart';
-import 'package:chatapp/resources/authentication_methods.dart';
-import 'package:chatapp/screens/login.dart';
 import 'package:chatapp/models/user.dart';
-import 'package:flutter/services.dart';
+
+double itemHeight;
+double itemWidth;
 
 class UserProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final UserProvider userProvider = Provider.of<UserProvider>(context);
     Size media = MediaQuery.of(context).size;
-    final double itemHeight = media.height;
-    final double itemWidth = media.width;
-    signOut() async {
-      final bool isLoggedOut = await AuthenticationMethods().signOut();
-      if (isLoggedOut) {
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => Login()),
-            (Route<dynamic> route) => false);
-      }
-    }
+    itemHeight = media.height;
+    itemWidth = media.width;
 
     return Scaffold(
       body: Container(
@@ -34,7 +25,7 @@ class UserProfile extends StatelessWidget {
             PreferredSize(
               child: MainAppBar(
                   title: userProvider.getUser.name, back: "userprofile"),
-              preferredSize: Size.fromHeight(media.height),
+              preferredSize: Size.fromHeight(itemHeight),
             ),
             UserDetailsBody(),
           ],
@@ -59,7 +50,7 @@ class UserDetailsBody extends StatelessWidget {
             isRound: true,
             radius: 80,
           ),
-          SizedBox(width: 15),
+          SizedBox(width: itemWidth * 0.01),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[

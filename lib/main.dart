@@ -37,41 +37,6 @@ class _MainPageState extends State<Main> {
     _getdeviceToken();
     sendData();
     Future.delayed(Duration(milliseconds: 500), () {
-      // _firebaseMessaging.configure(
-      //   onMessage: (Map<String, dynamic> message) async {
-      //     print("onMessage: $message");
-      //     final notification = message['data'];
-      //     setState(() {
-      //       print("title: " +
-      //           notification['title'] +
-      //           "body: " +
-      //           notification['body']);
-      //     });
-      //   },
-      //   onLaunch: (Map<String, dynamic> message) async {
-      //     print("onLaunch: $message");
-      //     final notification = message['data'];
-      //     setState(() {
-      //       print("title: " +
-      //           notification['title'] +
-      //           "body: " +
-      //           notification['body']);
-      //     });
-      //     print("onLaunch: " + notification['click_action']);
-      //   },
-      //   onResume: (Map<String, dynamic> message) async {
-      //     print("onResume: $message");
-      //     final notification = message['data'];
-      //     setState(() {
-      //       print("title: " +
-      //           notification['title'] +
-      //           "body: " +
-      //           notification['body']);
-      //     });
-
-      //     print("onResume: " + notification['click_action']);
-      //   },
-      // );
       _firebaseMessaging.requestNotificationPermissions(
           const IosNotificationSettings(sound: true, badge: true, alert: true));
     });
