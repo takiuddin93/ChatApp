@@ -1,3 +1,4 @@
+import 'package:chatapp/provider/user_provider.dart';
 import 'package:chatapp/resources/authentication_methods.dart';
 import 'package:chatapp/screens/login.dart';
 import 'package:chatapp/widgets/user_circle.dart';
@@ -7,6 +8,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:chatapp/screens/dashboard.dart';
 import 'package:chatapp/widgets/mainappbar_style.dart';
+import 'package:chatapp/enum/user_state.dart';
+import 'package:provider/provider.dart';
 
 Color green = Color(0xFF6B8449);
 Color darkgreen = Color(0xFF4C5B39);
@@ -215,6 +218,7 @@ class MainAppBar extends StatelessWidget {
       String alertdialogDescription,
       String alertdialogCancelButton,
       String alertdialogOkButton}) {
+    UserProvider userProvider = Provider.of<UserProvider>(context);
     showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -252,6 +256,9 @@ class MainAppBar extends StatelessWidget {
                     final bool isLoggedOut =
                         await _authenticationMethods.signOut();
                     if (isLoggedOut) {
+                      _authenticationMethods.setUserState(
+                          userId: userProvider.getUser.uid,
+                          userState: UserState.Offline);
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(builder: (context) => Login()),
