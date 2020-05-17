@@ -8,6 +8,12 @@
 
 A Flutter Chat Application, using Firebase for Google Sign In/Sign Up, exchange texts, emojis, and images. Integrated Agora Sdk for communicating over video calls. A little tweaking to communicate over voice calls only.
 
+### Get Started
+
+* Clone this repo
+* Run `flutter packages get`
+* Run `flutter run` (remember open simulator or connect physical device, iOS auto run additional command `pod install`)
+
 ### SETUP
 
 Connect the app to your Firebase Project from your [Firebase Console](http://console.firebase.google.com) and add the `google-services.json` in the `/android/app` directory.
