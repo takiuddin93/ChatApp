@@ -198,89 +198,78 @@ class MainAppBar extends StatelessWidget {
         }
         break;
     }
+    UserProvider userProvider = Provider.of<UserProvider>(context);
     return Builder(
       builder: (context) => IconButton(
         color: UniversalVariables.whiteColor,
         icon: new Icon(_actioniconData),
         onPressed: () {
-          dialogBox(context,
-              alertdialogTitle: alertdialogTitle,
-              alertdialogDescription: alertdialogDescription,
-              alertdialogCancelButton: alertdialogCancelButton,
-              alertdialogOkButton: alertdialogOkButton);
+          showDialog<void>(
+            context: context,
+            barrierDismissible: false, // user must tap button!
+            builder: (BuildContext context) {
+              return AlertDialog(
+                backgroundColor: UniversalVariables.separatorColor,
+                title: Text(
+                  alertdialogTitle,
+                  style: TextStyle(
+                    color: UniversalVariables.blueColor,
+                  ),
+                ),
+                content: SingleChildScrollView(
+                  child: ListBody(
+                    children: <Widget>[
+                      Text(
+                        alertdialogDescription,
+                        style: TextStyle(
+                          color: UniversalVariables.blueColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                actions: <Widget>[
+                  FlatButton(
+                      child: Text(
+                        alertdialogOkButton,
+                        style: TextStyle(
+                          color: UniversalVariables.blueColor,
+                        ),
+                      ),
+                      onPressed: () async {
+                        if (alertdialogOkButton == "Ok") {
+                          final bool isLoggedOut =
+                              await _authenticationMethods.signOut();
+                          if (isLoggedOut) {
+                            _authenticationMethods.setUserState(
+                                userId: userProvider.getUser.uid,
+                                userState: UserState.Offline);
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Login()),
+                                (Route<dynamic> route) => false);
+                          }
+                        } else {
+                          Navigator.pop(context);
+                        }
+                      }),
+                  FlatButton(
+                      child: Text(
+                        alertdialogCancelButton,
+                        style: TextStyle(
+                          color: UniversalVariables.blueColor,
+                        ),
+                      ),
+                      onPressed: () async {
+                        Navigator.pop(context);
+                      }),
+                ],
+              );
+            },
+          );
         },
       ),
-    );
-  }
-
-  void dialogBox(BuildContext context,
-      {String alertdialogTitle,
-      String alertdialogDescription,
-      String alertdialogCancelButton,
-      String alertdialogOkButton}) {
-    UserProvider userProvider = Provider.of<UserProvider>(context);
-    showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: UniversalVariables.separatorColor,
-          title: Text(
-            alertdialogTitle,
-            style: TextStyle(
-              color: UniversalVariables.blueColor,
-            ),
-          ),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text(
-                  alertdialogDescription,
-                  style: TextStyle(
-                    color: UniversalVariables.blueColor,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            FlatButton(
-                child: Text(
-                  alertdialogOkButton,
-                  style: TextStyle(
-                    color: UniversalVariables.blueColor,
-                  ),
-                ),
-                onPressed: () async {
-                  if (alertdialogOkButton == "Ok") {
-                    final bool isLoggedOut =
-                        await _authenticationMethods.signOut();
-                    if (isLoggedOut) {
-                      _authenticationMethods.setUserState(
-                          userId: userProvider.getUser.uid,
-                          userState: UserState.Offline);
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (context) => Login()),
-                          (Route<dynamic> route) => false);
-                    }
-                  } else {
-                    Navigator.pop(context);
-                  }
-                }),
-            FlatButton(
-                child: Text(
-                  alertdialogCancelButton,
-                  style: TextStyle(
-                    color: UniversalVariables.blueColor,
-                  ),
-                ),
-                onPressed: () async {
-                  Navigator.pop(context);
-                }),
-          ],
-        );
-      },
     );
   }
 

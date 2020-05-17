@@ -147,14 +147,69 @@ class _MyDashboardState extends State<MyDashboard> with WidgetsBindingObserver {
             Container(
               child: ChatListScreen(),
             ),
-            Container(child: GroupListScreen()),
-            Center(
+            // Container(child: GroupListScreen()),
+            Container(
+              child: Center(
+                  child: FlatButton(
                 child: Text(
-              "Call Logs",
-              style: TextStyle(
-                color: UniversalVariables.blueColor,
-              ),
-            )),
+                  "Call Logs",
+                  style: TextStyle(
+                    color: UniversalVariables.blueColor,
+                  ),
+                ),
+                onPressed: () {
+                  showDialog<void>(
+                    context: context,
+                    barrierDismissible: false, // user must tap button!
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        backgroundColor: UniversalVariables.separatorColor,
+                        title: Text(
+                          "alertdialogTitle",
+                          style: TextStyle(
+                            color: UniversalVariables.blueColor,
+                          ),
+                        ),
+                        content: SingleChildScrollView(
+                          child: ListBody(
+                            children: <Widget>[
+                              Text(
+                                "alertdialogDescription",
+                                style: TextStyle(
+                                  color: UniversalVariables.blueColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        actions: <Widget>[
+                          FlatButton(
+                              child: Text(
+                                "alertdialogOkButton",
+                                style: TextStyle(
+                                  color: UniversalVariables.blueColor,
+                                ),
+                              ),
+                              onPressed: () async {
+                                Navigator.pop(context);
+                              }),
+                          FlatButton(
+                              child: Text(
+                                "alertdialogCancelButton",
+                                style: TextStyle(
+                                  color: UniversalVariables.blueColor,
+                                ),
+                              ),
+                              onPressed: () async {
+                                Navigator.pop(context);
+                              }),
+                        ],
+                      );
+                    },
+                  );
+                },
+              )),
+            ),
             Container(child: ContactListScreen()),
           ],
           controller: pageController,
@@ -166,70 +221,64 @@ class _MyDashboardState extends State<MyDashboard> with WidgetsBindingObserver {
             padding: EdgeInsets.symmetric(vertical: 0),
             child: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
-              backgroundColor: UniversalVariables.whiteColor,
+              backgroundColor: UniversalVariables.appBar,
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.chat,
-                      color: (_page == 0)
-                          ? UniversalVariables.blueColor
-                          : UniversalVariables.greyColor),
+                  backgroundColor: _page == 0
+                      ? UniversalVariables.whiteColor
+                      : UniversalVariables.appBar,
+                  icon: Icon(
+                    Icons.chat,
+                    color: UniversalVariables.whiteColor,
+                    size: _page == 0 ? 32.0 : 18.0,
+                  ),
                   title: Text(
-                    "Chats",
-                    style: TextStyle(
-                      fontSize: _labelFontSize,
-                      color: (_page == 0)
-                          ? UniversalVariables.blueColor
-                          : Colors.grey,
-                      // height: 0.0
-                    ),
+                    "",
+                    style: TextStyle(fontSize: 0.0, height: 0.0),
+                  ),
+                ),
+                // BottomNavigationBarItem(
+                //   icon: Icon(Icons.group,
+                //       color: (_page == 1)
+                //           ? UniversalVariables.blueColor
+                //           : UniversalVariables.greyColor),
+                //   title: Text(
+                //     "Groups",
+                //     style: TextStyle(
+                //       fontSize: _labelFontSize,
+                //       color: (_page == 1)
+                //           ? UniversalVariables.blueColor
+                //           : Colors.grey,
+                //       // height: 0.0
+                //     ),
+                //   ),
+                // ),
+                BottomNavigationBarItem(
+                  backgroundColor: _page == 1
+                      ? UniversalVariables.whiteColor
+                      : UniversalVariables.appBar,
+                  icon: Icon(
+                    Icons.call,
+                    color: UniversalVariables.whiteColor,
+                    size: _page == 1 ? 32.0 : 18.0,
+                  ),
+                  title: Text(
+                    "",
+                    style: TextStyle(fontSize: 0.0, height: 0.0),
                   ),
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.group,
-                      color: (_page == 1)
-                          ? UniversalVariables.blueColor
-                          : UniversalVariables.greyColor),
-                  title: Text(
-                    "Groups",
-                    style: TextStyle(
-                      fontSize: _labelFontSize,
-                      color: (_page == 1)
-                          ? UniversalVariables.blueColor
-                          : Colors.grey,
-                      // height: 0.0
-                    ),
+                  backgroundColor: _page == 2
+                      ? UniversalVariables.whiteColor
+                      : UniversalVariables.appBar,
+                  icon: Icon(
+                    Icons.contact_phone,
+                    color: UniversalVariables.whiteColor,
+                    size: _page == 2 ? 32.0 : 16.0,
                   ),
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.call,
-                      color: (_page == 1)
-                          ? UniversalVariables.blueColor
-                          : UniversalVariables.greyColor),
                   title: Text(
-                    "Calls",
-                    style: TextStyle(
-                      fontSize: _labelFontSize,
-                      color: (_page == 1)
-                          ? UniversalVariables.blueColor
-                          : Colors.grey,
-                      // height: 0.0
-                    ),
-                  ),
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.contact_phone,
-                      color: (_page == 2)
-                          ? UniversalVariables.blueColor
-                          : UniversalVariables.greyColor),
-                  title: Text(
-                    "Contacts",
-                    style: TextStyle(
-                      fontSize: _labelFontSize,
-                      color: (_page == 2)
-                          ? UniversalVariables.blueColor
-                          : Colors.grey,
-                      // height: 0.0
-                    ),
+                    "",
+                    style: TextStyle(fontSize: 0.0, height: 0.0),
                   ),
                 ),
               ],

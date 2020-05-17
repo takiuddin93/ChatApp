@@ -141,7 +141,7 @@ class _ContactSearchScreenState extends State<ContactSearchScreen> {
             name: suggestionList[index].name,
             username: suggestionList[index].username,
             firebaseToken: suggestionList[index].firebaseToken);
-
+        // print("Role: " + searchedUser.role);
         return CustomTile(
           mini: false,
           onTap: () => Navigator.push(
@@ -186,6 +186,55 @@ class _ContactSearchScreenState extends State<ContactSearchScreen> {
                     ),
                   ))),
         );
+
+        // return searchedUser.role == 'doctor'
+        //     ? CustomTile(
+        //         mini: false,
+        //         onTap: () => Navigator.push(
+        //             context,
+        //             MaterialPageRoute(
+        //                 builder: (context) => ChatScreen(
+        //                       receiver: searchedUser,
+        //                     ))),
+        //         title: Padding(
+        //           padding:
+        //               EdgeInsets.only(left: 8, top: 0, right: 0, bottom: 0),
+        //           child: Text(
+        //             searchedUser.name,
+        //             style: TextStyle(
+        //               color: UniversalVariables.textColor,
+        //               fontWeight: FontWeight.bold,
+        //             ),
+        //           ),
+        //         ),
+        //         subtitle: Padding(
+        //           padding:
+        //               EdgeInsets.only(left: 8, top: 0, right: 0, bottom: 0),
+        //           child: Text(
+        //             searchedUser.username,
+        //             style: TextStyle(color: UniversalVariables.subtextColor),
+        //           ),
+        //         ),
+        //         leading: CircleAvatar(
+        //           backgroundImage: NetworkImage(searchedUser.profilePhoto),
+        //           backgroundColor: UniversalVariables.greyColor,
+        //         ),
+        //         trailing: Container(
+        //             decoration: BoxDecoration(
+        //                 color: UniversalVariables.blueColor,
+        //                 borderRadius: BorderRadius.all(Radius.circular(4))),
+        //             // color: UniversalVariables.blueColor,
+        //             child: FlatButton(
+        //                 onPressed: () => _contactMethods.addContactToDb(
+        //                     userProvider.getUser, searchedUser),
+        //                 child: Text(
+        //                   "Add Contact",
+        //                   style: TextStyle(
+        //                     color: UniversalVariables.whiteColor,
+        //                   ),
+        //                 ))),
+        //       )
+        //     : null;
       }),
     );
   }
