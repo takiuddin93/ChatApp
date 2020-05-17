@@ -1,4 +1,4 @@
-# ChatApp
+## ChatApp
 
 A new Flutter project.
 
@@ -8,7 +8,9 @@ A Flutter Chat Application, using Firebase for Google Sign In/Sign Up, exchange 
 
 ### SETUP
 
-Inside `/lib` make a new folder `/configs`, where you'll need to make two files `agora_configs.dart` and `firebase_configs.dart`.
+Connect the app to your Firebase Project from your [Firebase Console](http://console.firebase.google.com) and add the `google-services.json` in the `/android/app` directory.
+
+Inside `/lib` directory make a new directory `/configs`, where you'll need to make two files `agora_configs.dart` and `firebase_configs.dart`.
 
 Inside `agora_configs.dart` add:
 
@@ -16,7 +18,7 @@ Inside `agora_configs.dart` add:
 
 Inside `firebase_configs.dart` add: 
   
-  `const SERVER_KEY = 'YOUR_FIREBASE_SERVER_KEY';` from your [Firebase Console](http://console.firebase.google.com).
+  `const SERVER_KEY = '<YOUR_FIREBASE_SERVER_KEY>';` from your [Firebase Console](http://console.firebase.google.com).
 
 ### ChatApp UI
 
