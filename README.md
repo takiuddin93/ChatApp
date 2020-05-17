@@ -8,7 +8,12 @@ A Flutter Chat Application, using Firebase for Google Sign In/Sign Up, exchange 
 
 ### SETUP
 
-Inside /lib make a new folder /configs. Inside that make two files `agora_configs.dart` and `firebase_configs.dart`.
+Inside `/lib` make a new folder `/configs`, where you'll need to make two files `agora_configs.dart` and `firebase_configs.dart`.
+
+Inside `agora_configs.dart`
+
+  `const APP_ID = '`[YOUR_AGORA_SDK_TOKEN](https://console.agora.io)`';`
+
 
 ### ChatApp UI
 
