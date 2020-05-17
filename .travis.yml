@@ -1,4 +1,12 @@
 language: dart
 dart:
-- stable
-os: windows
+  - stable
+os: 
+  - windows
+before_script:
+  - cd ..
+  - git clone https://github.com/takiuddin93/ChatApp.git
+  - flutter doctor
+script:
+  - cd $ChatApp
+  - flutter packages get
