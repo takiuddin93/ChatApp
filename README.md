@@ -14,7 +14,7 @@ A Flutter Chat Application, using Firebase for Google Sign In/Sign Up, exchange 
 * Run `flutter packages get`
 * Run `flutter run` (remember open simulator or connect physical device, iOS auto run additional command `pod install`)
 
-### SETUP
+### Setup
 
 Connect the app to your Firebase Project from your [Firebase Console](http://console.firebase.google.com) and add the `google-services.json` in the `/android/app` directory.
 
