@@ -3,14 +3,21 @@ dart:
   - stable
 os: 
   - windows
+
 before_script:
   - cd ..
   - git clone https://github.com/takiuddin93/ChatApp.git
   - export PATH=`pwd`/flutter/bin:`pwd`/flutter/bin/cache/dart-sdk/bin:$PATH
   - flutter doctor
+
 script:
   - cd $TRAVIS_BUILD_DIR
   - flutter pub get
   - flutter analyze --no-pub --no-current-package lib
   - flutter test
   - flutter packages pub publish --dry-run
+
+env: FLUTTER_VERSION=beta
+
+notifications:
+  email: takiuddin93@gmail.com
