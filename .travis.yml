@@ -6,7 +6,11 @@ os:
 before_script:
   - cd ..
   - git clone https://github.com/takiuddin93/ChatApp.git
+  - export PATH=`pwd`/flutter/bin:`pwd`/flutter/bin/cache/dart-sdk/bin:$PATH
   - flutter doctor
 script:
-  - cd $ChatApp
+  - cd $TRAVIS_BUILD_DIR
   - flutter packages get
+  - flutter analyze --no-pub --no-current-package lib
+  - flutter test
+  - flutter packages pub publish --dry-run
