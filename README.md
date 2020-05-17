@@ -10,7 +10,7 @@ A Flutter Chat Application, using Firebase for Google Sign In/Sign Up, exchange 
 
 Connect the app to your Firebase Project from your [Firebase Console](http://console.firebase.google.com) and add the `google-services.json` in the `/android/app` directory.
 
-Inside `/lib` directory make a new directory `/configs`, where you'll need to make two files `agora_configs.dart` and `firebase_configs.dart`.
+Inside `/lib` directory make a new directory `/configs`, where you'll need to make two new files `agora_configs.dart` and `firebase_configs.dart`.
 
 Inside `agora_configs.dart` add:
 
