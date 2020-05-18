@@ -34,8 +34,9 @@ Inside `firebase_configs.dart` add:
 ![App UI](assets/images/ChatApp.png)
 
 ### TODO:
-- Enable Group Chats
-- Enable Group Calls
+- Integrate Facebook Sign in and Sign up.
+- Enable Group Chats.
+- Enable Group Calls.
 
 ### For Beginners
 
