@@ -1,4 +1,4 @@
-# ChatApp
+## ChatApp
 
 [![MIT Licenced](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/takiuddin93/ChatApp/blob/master/LICENSE)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/takiuddin93/ChatApp/commits/master)
@@ -12,9 +12,9 @@ A Flutter Chat Application, using Firebase for Google Sign In/Sign Up, exchange 
 
 ### Get Started
 
-* Clone this repo
-* Run `flutter packages get`
-* Run `flutter run` (remember open simulator or connect physical device, iOS auto run additional command `pod install`)
+  * Clone this repo
+  * Run `flutter packages get`
+  * Run `flutter run` (remember open simulator or connect physical device, iOS auto run additional command `pod install`)
 
 ### Setup
 
