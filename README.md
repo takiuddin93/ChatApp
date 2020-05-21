@@ -14,7 +14,7 @@ A Flutter Chat Application, using Firebase for Google Sign In/Sign Up, exchange 
 
   * Clone this repo
   * Run `flutter packages get`
-  * Run `flutter run` (remember open simulator or connect physical device, iOS auto run additional command `pod install`)
+  * Run `flutter run` (remember to open simulator or connect physical device, iOS auto run additional command `pod install`)
 
 ### Setup
 
