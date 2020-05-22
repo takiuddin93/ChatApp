@@ -1,5 +1,6 @@
 ## ChatApp
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9775560f9d9245e4be101679d2b04fc6)](https://app.codacy.com/manual/takiuddin93/ChatApp?utm_source=github.com&utm_medium=referral&utm_content=takiuddin93/ChatApp&utm_campaign=Badge_Grade_Dashboard)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/19d42f0130634dc48d8383e91b9a0cd3)](https://app.codacy.com/manual/takiuddin93/ChatApp?utm_source=github.com&utm_medium=referral&utm_content=takiuddin93/ChatApp&utm_campaign=Badge_Grade_Dashboard)
 [![MIT Licenced](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/takiuddin93/ChatApp/blob/master/LICENSE)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/takiuddin93/ChatApp/commits/master)
