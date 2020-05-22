@@ -12,20 +12,57 @@ dependencies:
   flutter:
     sdk: flutter
 
+  #for ios
   cupertino_icons: ^0.1.3
+
+  #for google sign in
   google_sign_in: ^4.4.6
+
+  #for firebase auth
   firebase_auth: ^0.16.0
+
+  #for firebase cloud storage
   cloud_firestore: ^0.13.5
+
+  #for firebase messaging
   firebase_messaging: ^6.0.15
+
+  #for firebase storage
   firebase_storage: ^3.1.5
+
+  #for emoji picker
   emoji_picker: ^0.1.0
+
+  #for image
+  image: ^2.1.13
+
+  #for image picker
   image_picker: ^0.6.6+1
+
+  #for provider
   provider: ^4.1.2
+
+  #for cached network image
   cached_network_image: ^2.2.0+1
+
+  #for agora rtc engine
   agora_rtc_engine: ^1.0.12
+
+  #for permissions
   permission_handler: ^3.0.0
+
+  #for keeping screen on
   wakelock: ^0.1.4+1
+
+  #for flutter svg
   flutter_svg: ^0.17.4
+
+  #for local storage
+  sqflite: ^1.3.0+1
+  hive: ^1.4.1+1
+
+  #fo intl
+  intl: ^0.16.1
 
 dev_dependencies:
   flutter_test:
