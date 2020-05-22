@@ -1,4 +1,4 @@
-## ChatApp
+# ChatApp
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9775560f9d9245e4be101679d2b04fc6)](https://app.codacy.com/manual/takiuddin93/ChatApp?utm_source=github.com&utm_medium=referral&utm_content=takiuddin93/ChatApp&utm_campaign=Badge_Grade_Dashboard)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/takiuddin93/ChatApp/commits/master)
@@ -7,17 +7,17 @@
 [![Build Status](https://travis-ci.org/takiuddin93/ChatApp.svg?branch=master)](https://travis-ci.org/github/takiuddin93/ChatApp)
 [![MIT Licenced](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/takiuddin93/ChatApp/blob/master/LICENSE)
 
-### Description
+## Description
 
 A Flutter Chat Application, using Firebase for Google Sign In/Sign Up, exchange texts, emojis, and images. Integrated Agora Sdk for communicating over video calls. A little tweaking to communicate over voice calls only.
 
-### Get Started
+## Get Started
 
 *   Clone this repo
 *   Run `flutter packages get`
 *   Run `flutter run` (remember to open simulator or connect physical device, iOS auto run additional command `pod install`)
 
-### Setup
+## Setup
 
 Connect the app to your Firebase Project from your [Firebase Console](http://console.firebase.google.com) and add the `google-services.json` in the `/android/app` directory.
 
@@ -31,17 +31,17 @@ Inside `firebase_configs.dart` add:
   
   `const SERVER_KEY = '<YOUR_FIREBASE_SERVER_KEY>';` from your [Firebase Console](http://console.firebase.google.com).
 
-### ChatApp UI
+## ChatApp UI
 
 ![App UI](assets/images/ChatApp.png)
 
-### TODO
+## TODO
 
 *   Integrate Facebook Sign in and Sign up.
 *   Enable Group Chats.
 *   Enable Group Calls.
 
-### For Beginners
+## For Beginners
 
 A few resources to get you started if this is your first Flutter project:
 
@@ -52,7 +52,7 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-### LICENSE
+## LICENSE
 
 ```
 MIT License
