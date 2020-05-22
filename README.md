@@ -1,5 +1,6 @@
 ## ChatApp
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/19d42f0130634dc48d8383e91b9a0cd3)](https://app.codacy.com/manual/takiuddin93/ChatApp?utm_source=github.com&utm_medium=referral&utm_content=takiuddin93/ChatApp&utm_campaign=Badge_Grade_Dashboard)
 [![MIT Licenced](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/takiuddin93/ChatApp/blob/master/LICENSE)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/takiuddin93/ChatApp/commits/master)
 [![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://takiuddin.com)
@@ -12,9 +13,9 @@ A Flutter Chat Application, using Firebase for Google Sign In/Sign Up, exchange 
 
 ### Get Started
 
-  * Clone this repo
-  * Run `flutter packages get`
-  * Run `flutter run` (remember to open simulator or connect physical device, iOS auto run additional command `pod install`)
+  *   Clone this repo
+  *   Run `flutter packages get`
+  *   Run `flutter run` (remember to open simulator or connect physical device, iOS auto run additional command `pod install`)
 
 ### Setup
 
@@ -34,7 +35,7 @@ Inside `firebase_configs.dart` add:
 
 ![App UI](assets/images/ChatApp.png)
 
-### TODO:
+### TODO
 *   Integrate Facebook Sign in and Sign up.
 *   Enable Group Chats.
 *   Enable Group Calls.
