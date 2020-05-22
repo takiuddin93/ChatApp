@@ -12,9 +12,9 @@ A Flutter Chat Application, using Firebase for Google Sign In/Sign Up, exchange 
 
 ### Get Started
 
-  * Clone this repo
-  * Run `flutter packages get`
-  * Run `flutter run` (remember to open simulator or connect physical device, iOS auto run additional command `pod install`)
+  *   Clone this repo
+  *   Run `flutter packages get`
+  *   Run `flutter run` (remember to open simulator or connect physical device, iOS auto run additional command `pod install`)
 
 ### Setup
 
@@ -34,7 +34,7 @@ Inside `firebase_configs.dart` add:
 
 ![App UI](assets/images/ChatApp.png)
 
-### TODO:
+### TODO
 *   Integrate Facebook Sign in and Sign up.
 *   Enable Group Chats.
 *   Enable Group Calls.
