@@ -1,6 +1,7 @@
 import 'package:chatapp/enum/user_state.dart';
 import 'package:chatapp/resources/authentication_methods.dart';
 import 'package:chatapp/screens/pageviews/contact_lists/contact_list_screen.dart';
+import 'package:chatapp/screens/pageviews/log_lists/log_screen.dart';
 import 'package:chatapp/utils/utilities.dart';
 import 'package:chatapp/widgets/mainappbar.dart';
 import 'package:flutter/cupertino.dart';
@@ -149,66 +150,7 @@ class _MyDashboardState extends State<MyDashboard> with WidgetsBindingObserver {
             ),
             // Container(child: GroupListScreen()),
             Container(
-              child: Center(
-                  child: FlatButton(
-                child: Text(
-                  "Call Logs",
-                  style: TextStyle(
-                    color: UniversalVariables.blueColor,
-                  ),
-                ),
-                onPressed: () {
-                  showDialog<void>(
-                    context: context,
-                    barrierDismissible: false, // user must tap button!
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        backgroundColor: UniversalVariables.separatorColor,
-                        title: Text(
-                          "alertdialogTitle",
-                          style: TextStyle(
-                            color: UniversalVariables.blueColor,
-                          ),
-                        ),
-                        content: SingleChildScrollView(
-                          child: ListBody(
-                            children: <Widget>[
-                              Text(
-                                "alertdialogDescription",
-                                style: TextStyle(
-                                  color: UniversalVariables.blueColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        actions: <Widget>[
-                          FlatButton(
-                              child: Text(
-                                "alertdialogOkButton",
-                                style: TextStyle(
-                                  color: UniversalVariables.blueColor,
-                                ),
-                              ),
-                              onPressed: () async {
-                                Navigator.pop(context);
-                              }),
-                          FlatButton(
-                              child: Text(
-                                "alertdialogCancelButton",
-                                style: TextStyle(
-                                  color: UniversalVariables.blueColor,
-                                ),
-                              ),
-                              onPressed: () async {
-                                Navigator.pop(context);
-                              }),
-                        ],
-                      );
-                    },
-                  );
-                },
-              )),
+              child: LogScreen(),
             ),
             Container(child: ContactListScreen()),
           ],
@@ -221,7 +163,7 @@ class _MyDashboardState extends State<MyDashboard> with WidgetsBindingObserver {
             padding: EdgeInsets.symmetric(vertical: 0),
             child: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
-              backgroundColor: UniversalVariables.appBar,
+              backgroundColor: UniversalVariables.bottomBarNavigation,
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                   backgroundColor: _page == 0
