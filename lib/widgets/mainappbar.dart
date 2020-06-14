@@ -1,6 +1,7 @@
 import 'package:chatapp/provider/user_provider.dart';
 import 'package:chatapp/resources/authentication_methods.dart';
 import 'package:chatapp/screens/login.dart';
+import 'package:chatapp/widgets/custom_notification_dialog_widget.dart';
 import 'package:chatapp/widgets/user_circle.dart';
 import 'package:chatapp/screens/contact_search_screen.dart';
 import 'package:chatapp/utils/universal_variables.dart';
@@ -10,14 +11,6 @@ import 'package:chatapp/screens/dashboard.dart';
 import 'package:chatapp/widgets/mainappbar_style.dart';
 import 'package:chatapp/enum/user_state.dart';
 import 'package:provider/provider.dart';
-
-Color green = Color(0xFF6B8449);
-Color darkgreen = Color(0xFF4C5B39);
-Color black = Color(0xFF000000);
-Color grey = Color(0xFF808184);
-Color greyShadow = Color(0xFF33808184);
-Color red = Color(0XFFFD3131);
-Color white = Color(0xFFFFFFFF);
 
 class MainAppBar extends StatelessWidget {
   final String title, back, initials;
@@ -103,6 +96,11 @@ class MainAppBar extends StatelessWidget {
           _leadingiconData = Icons.arrow_back;
         }
         break;
+      case "log":
+        {
+          _leadingiconData = Icons.arrow_back;
+        }
+        break;
       default:
         {
           Navigator.pop(context);
@@ -113,10 +111,10 @@ class MainAppBar extends StatelessWidget {
     }
     return Builder(
       builder: (context) => IconButton(
-        color: green,
+        color: UniversalVariables.appBarBackIcon,
         icon: new Icon(
           _leadingiconData,
-          color: white,
+          color: UniversalVariables.appBarBackIcon,
         ),
         onPressed: () {
           Navigator.pop(context);
@@ -140,7 +138,7 @@ class MainAppBar extends StatelessWidget {
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w600,
           fontSize: 18.0,
-          color: Colors.white,
+          color: UniversalVariables.textColor,
         ),
         children: [
           TextSpan(
@@ -174,7 +172,7 @@ class MainAppBar extends StatelessWidget {
           _actioniconData = Icons.notifications;
           alertdialogTitle = 'Notifications';
           alertdialogDescription = 'This feature has not been implemented yet!';
-          alertdialogOkButton = '';
+          alertdialogOkButton = 'Ok';
           alertdialogCancelButton = 'Cancel';
         }
         break;
@@ -193,80 +191,26 @@ class MainAppBar extends StatelessWidget {
 
           alertdialogTitle = 'Notifications';
           alertdialogDescription = 'This feature has not been implemented yet!';
-          alertdialogOkButton = '';
+          alertdialogOkButton = 'Ok';
           alertdialogCancelButton = 'Cancel';
         }
         break;
     }
     UserProvider userProvider = Provider.of<UserProvider>(context);
+
     return Builder(
       builder: (context) => IconButton(
-        color: UniversalVariables.whiteColor,
+        color: UniversalVariables.appBarNotificationsIcon,
         icon: new Icon(_actioniconData),
         onPressed: () {
-          showDialog<void>(
+          CustomDialog.showScaleAlertBox(
             context: context,
-            barrierDismissible: false, // user must tap button!
-            builder: (BuildContext context) {
-              return AlertDialog(
-                backgroundColor: UniversalVariables.separatorColor,
-                title: Text(
-                  alertdialogTitle,
-                  style: TextStyle(
-                    color: UniversalVariables.blueColor,
-                  ),
-                ),
-                content: SingleChildScrollView(
-                  child: ListBody(
-                    children: <Widget>[
-                      Text(
-                        alertdialogDescription,
-                        style: TextStyle(
-                          color: UniversalVariables.blueColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                actions: <Widget>[
-                  FlatButton(
-                      child: Text(
-                        alertdialogOkButton,
-                        style: TextStyle(
-                          color: UniversalVariables.blueColor,
-                        ),
-                      ),
-                      onPressed: () async {
-                        if (alertdialogOkButton == "Ok") {
-                          final bool isLoggedOut =
-                              await _authenticationMethods.signOut();
-                          if (isLoggedOut) {
-                            _authenticationMethods.setUserState(
-                                userId: userProvider.getUser.uid,
-                                userState: UserState.Offline);
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Login()),
-                                (Route<dynamic> route) => false);
-                          }
-                        } else {
-                          Navigator.pop(context);
-                        }
-                      }),
-                  FlatButton(
-                      child: Text(
-                        alertdialogCancelButton,
-                        style: TextStyle(
-                          color: UniversalVariables.blueColor,
-                        ),
-                      ),
-                      onPressed: () async {
-                        Navigator.pop(context);
-                      }),
-                ],
-              );
-            },
+            title: alertdialogTitle,
+            icon: Icons.info_outline, // IF YOU WANT TO ADD ICON
+            text: alertdialogDescription, // IF YOU WANT TO ADD
+            firstButton: back.toString() == 'userprofile'
+                ? alertdialogOkButton
+                : alertdialogCancelButton,
           );
         },
       ),
