@@ -1,3 +1,4 @@
+import 'package:chatapp/utils/universal_variables.dart';
 import 'package:flutter/services.dart';
 import 'package:chatapp/screens/dashboard.dart';
 import 'package:chatapp/screens/login.dart';
@@ -10,6 +11,8 @@ import 'package:chatapp/resources/authentication_methods.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(statusBarColor: UniversalVariables.primary));
   runApp(Main());
 }
 
