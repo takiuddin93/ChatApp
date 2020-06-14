@@ -14,7 +14,7 @@ class NewChatButton extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-            gradient: UniversalVariables.fabGradient,
+            color: UniversalVariables.fabColor,
             borderRadius: BorderRadius.circular(50)),
         child: Icon(
           Icons.add_comment,
@@ -38,7 +38,7 @@ class NewGroupButton extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-            gradient: UniversalVariables.fabGradient,
+            color: UniversalVariables.fabColor,
             borderRadius: BorderRadius.circular(50)),
         child: Icon(
           Icons.group_add,
