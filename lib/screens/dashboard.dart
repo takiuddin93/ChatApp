@@ -179,22 +179,6 @@ class _MyDashboardState extends State<MyDashboard> with WidgetsBindingObserver {
                     style: TextStyle(fontSize: 0.0, height: 0.0),
                   ),
                 ),
-                // BottomNavigationBarItem(
-                //   icon: Icon(Icons.group,
-                //       color: (_page == 1)
-                //           ? UniversalVariables.blueColor
-                //           : UniversalVariables.greyColor),
-                //   title: Text(
-                //     "Groups",
-                //     style: TextStyle(
-                //       fontSize: _labelFontSize,
-                //       color: (_page == 1)
-                //           ? UniversalVariables.blueColor
-                //           : Colors.grey,
-                //       // height: 0.0
-                //     ),
-                //   ),
-                // ),
                 BottomNavigationBarItem(
                   backgroundColor: _page == 1
                       ? UniversalVariables.whiteColor
