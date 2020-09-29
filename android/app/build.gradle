@@ -59,7 +59,7 @@ flutter {
 }
 
 dependencies {
-    implementation 'com.google.firebase:firebase-auth:19.3.2'
+    implementation 'com.google.firebase:firebase-auth:19.4.0'
     implementation 'com.google.firebase:firebase-messaging:20.2.4'
 
     testImplementation 'junit:junit:4.13'
