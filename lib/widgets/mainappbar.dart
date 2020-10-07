@@ -1,6 +1,5 @@
 import 'package:chatapp/provider/user_provider.dart';
 import 'package:chatapp/resources/authentication_methods.dart';
-import 'package:chatapp/screens/login.dart';
 import 'package:chatapp/widgets/custom_notification_dialog_widget.dart';
 import 'package:chatapp/widgets/user_circle.dart';
 import 'package:chatapp/screens/contact_search_screen.dart';

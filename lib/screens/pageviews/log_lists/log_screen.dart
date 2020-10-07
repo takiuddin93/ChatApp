@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:chatapp/screens/callscreens/pickup/pickup_layout.dart';
 import 'package:chatapp/screens/pageviews/log_lists/widgets/floating_column.dart';
-import 'package:chatapp/utils/universal_variables.dart';
-import 'package:chatapp/widgets/mainappbar.dart';
 
 import 'widgets/log_list_container.dart';
 
