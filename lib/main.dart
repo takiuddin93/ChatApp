@@ -1,4 +1,5 @@
 import 'package:chatapp/utils/universal_variables.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:chatapp/screens/dashboard.dart';
 import 'package:chatapp/screens/login.dart';
@@ -10,7 +11,9 @@ import 'package:chatapp/provider/user_provider.dart';
 import 'package:chatapp/resources/authentication_methods.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarColor: UniversalVariables.primary));
   runApp(Main());
@@ -69,7 +72,7 @@ class _MainPageState extends State<Main> {
           theme: ThemeData(brightness: Brightness.dark),
           home: FutureBuilder(
               future: _authenticationMethods.getCurrentUser(),
-              builder: (context, AsyncSnapshot<FirebaseUser> snapshot) {
+              builder: (context, AsyncSnapshot<User> snapshot) {
                 if (snapshot.hasData != false) {
                   return Dashboard();
                 } else {
