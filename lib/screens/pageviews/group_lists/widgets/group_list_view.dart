@@ -2,7 +2,7 @@ import 'package:chatapp/utils/universal_variables.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:chatapp/models/group.dart';
-import 'package:chatapp/models/user.dart';
+import 'package:chatapp/models/users.dart';
 import 'package:chatapp/provider/user_provider.dart';
 import 'package:chatapp/resources/authentication_methods.dart';
 import 'package:chatapp/resources/group_methods.dart';
@@ -21,14 +21,14 @@ class GroupListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<User>(
+    return FutureBuilder<Users>(
       future: _authenticationMethods.getUserDetailsById(group.uid),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          User user = snapshot.data;
+          Users users = snapshot.data;
 
           return ViewLayout(
-            contact: user,
+            contact: users,
           );
         }
         return Center(
@@ -40,7 +40,7 @@ class GroupListView extends StatelessWidget {
 }
 
 class ViewLayout extends StatelessWidget {
-  final User contact;
+  final Users contact;
   final GroupMethods _groupMethods = GroupMethods();
 
   ViewLayout({

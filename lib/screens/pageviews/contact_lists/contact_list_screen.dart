@@ -37,7 +37,7 @@ class ContactListContainer extends StatelessWidget {
           ),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              var docList = snapshot.data.documents;
+              var docList = snapshot.data.docs;
 
               if (docList.isEmpty) {
                 return ContactQuietBox();
@@ -46,7 +46,7 @@ class ContactListContainer extends StatelessWidget {
                 padding: EdgeInsets.all(10),
                 itemCount: docList.length,
                 itemBuilder: (context, index) {
-                  Contact contact = Contact.fromMap(docList[index].data);
+                  Contact contact = Contact.fromMap(docList[index].data());
 
                   return ContactListView(contact);
                 },

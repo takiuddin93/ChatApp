@@ -1,7 +1,7 @@
 import 'package:chatapp/utils/universal_variables.dart';
 import 'package:flutter/material.dart';
 import 'package:chatapp/models/contact.dart';
-import 'package:chatapp/models/user.dart';
+import 'package:chatapp/models/users.dart';
 import 'package:chatapp/resources/authentication_methods.dart';
 // import 'package:chatapp/resources/contact_methods.dart';
 import 'package:chatapp/screens/chatscreens/chat_screen.dart';
@@ -17,14 +17,14 @@ class ContactListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<User>(
+    return FutureBuilder<Users>(
       future: _authenticationMethods.getUserDetailsById(contact.uid),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          User user = snapshot.data;
+          Users users = snapshot.data;
 
           return ViewLayout(
-            contact: user,
+            contact: users,
           );
         }
         return Center(
@@ -36,7 +36,7 @@ class ContactListView extends StatelessWidget {
 }
 
 class ViewLayout extends StatelessWidget {
-  final User contact;
+  final Users contact;
 
   ViewLayout({
     @required this.contact,

@@ -2,7 +2,7 @@ import 'package:chatapp/utils/universal_variables.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:chatapp/enum/user_state.dart';
-import 'package:chatapp/models/user.dart';
+import 'package:chatapp/models/users.dart';
 import 'package:chatapp/resources/authentication_methods.dart';
 import 'package:chatapp/utils/utilities.dart';
 
@@ -36,10 +36,10 @@ class OnlineDotIndicator extends StatelessWidget {
           uid: uid,
         ),
         builder: (context, snapshot) {
-          User user;
+          Users users;
 
           if (snapshot.hasData && snapshot.data.data != null) {
-            user = User.fromMap(snapshot.data.data);
+            users = Users.fromMap(snapshot.data.data());
           }
 
           return Container(
@@ -48,7 +48,7 @@ class OnlineDotIndicator extends StatelessWidget {
             margin: EdgeInsets.only(right: 2, top: 46),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: getColor(user?.state),
+              color: getColor(users?.state),
             ),
           );
         },
