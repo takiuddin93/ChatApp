@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 import 'package:chatapp/constants/strings.dart';
 import 'package:chatapp/enum/view_state.dart';
 import 'package:chatapp/models/message.dart';
-import 'package:chatapp/models/user.dart';
+import 'package:chatapp/models/users.dart';
 import 'package:chatapp/provider/image_upload_provider.dart';
 import 'package:chatapp/resources/storage_methods.dart';
 import 'package:chatapp/resources/chat_methods.dart';
@@ -27,7 +27,7 @@ import 'package:chatapp/utils/utilities.dart';
 import 'package:chatapp/widgets/custom_tile.dart';
 
 class ChatScreen extends StatefulWidget {
-  final User receiver;
+  final Users receiver;
 
   ChatScreen({this.receiver});
 
@@ -45,7 +45,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   ScrollController _listScrollController = ScrollController();
 
-  User sender;
+  Users sender;
 
   String _currentUserId;
 
@@ -55,7 +55,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   ImageUploadProvider _imageUploadProvider;
 
-  User receiver;
+  Users receiver;
 
   _ChatScreenState(this.receiver);
 
@@ -66,10 +66,10 @@ class _ChatScreenState extends State<ChatScreen> {
       _currentUserId = user.uid;
 
       setState(() {
-        sender = User(
+        sender = Users(
           uid: user.uid,
           name: user.displayName,
-          profilePhoto: user.photoUrl,
+          profilePhoto: user.photoURL,
         );
       });
     });
@@ -140,9 +140,9 @@ class _ChatScreenState extends State<ChatScreen> {
 
   Widget messageList() {
     return StreamBuilder(
-      stream: Firestore.instance
+      stream: FirebaseFirestore.instance
           .collection(MESSAGES_COLLECTION)
-          .document(_currentUserId)
+          .doc(_currentUserId)
           .collection(widget.receiver.uid)
           .orderBy(TIMESTAMP_FIELD, descending: true)
           .snapshots(),
@@ -163,10 +163,10 @@ class _ChatScreenState extends State<ChatScreen> {
           padding: EdgeInsets.all(10),
           controller: _listScrollController,
           reverse: true,
-          itemCount: snapshot.data.documents.length,
+          itemCount: snapshot.data.docs.length,
           itemBuilder: (context, index) {
             // mention the arrow syntax if you get the time
-            return chatMessageItem(snapshot.data.documents[index]);
+            return chatMessageItem(snapshot.data.docs[index]);
           },
         );
       },
@@ -174,7 +174,7 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Widget chatMessageItem(DocumentSnapshot snapshot) {
-    Message _message = Message.fromMap(snapshot.data);
+    Message _message = Message.fromMap(snapshot.data());
     return Container(
       margin: EdgeInsets.symmetric(vertical: 15),
       child: Container(
