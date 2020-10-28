@@ -4,7 +4,7 @@ import 'package:chatapp/screens/dashboard.dart';
 import 'package:chatapp/widgets/mainappbar_style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:chatapp/models/user.dart';
+import 'package:chatapp/models/users.dart';
 import 'package:chatapp/resources/authentication_methods.dart';
 import 'package:chatapp/screens/callscreens/pickup/pickup_layout.dart';
 import 'package:chatapp/screens/chatscreens/chat_screen.dart';
@@ -24,7 +24,7 @@ class _GroupSearchScreenState extends State<GroupSearchScreen> {
 
   final GroupMethods _groupMethods = GroupMethods();
 
-  List<User> userList;
+  List<Users> userList;
   String query = "";
   TextEditingController searchController = TextEditingController();
 
@@ -32,8 +32,8 @@ class _GroupSearchScreenState extends State<GroupSearchScreen> {
   void initState() {
     super.initState();
 
-    _authenticationMethods.getCurrentUser().then((FirebaseUser user) {
-      _authenticationMethods.fetchAllUsers(user).then((List<User> list) {
+    _authenticationMethods.getCurrentUser().then((User user) {
+      _authenticationMethods.fetchAllUsers(user).then((List<Users> list) {
         setState(() {
           userList = list;
         });
@@ -118,13 +118,13 @@ class _GroupSearchScreenState extends State<GroupSearchScreen> {
   }
 
   buildSuggestions(UserProvider userProvider, String query) {
-    final List<User> suggestionList = query.isEmpty
+    final List<Users> suggestionList = query.isEmpty
         ? []
         : userList != null
-            ? userList.where((User user) {
-                String _getUsername = user.username.toLowerCase();
+            ? userList.where((Users users) {
+                String _getUsername = users.username.toLowerCase();
                 String _query = query.toLowerCase();
-                String _getName = user.name.toLowerCase();
+                String _getName = users.name.toLowerCase();
                 bool matchesUsername = _getUsername.contains(_query);
                 bool matchesName = _getName.contains(_query);
 
@@ -135,7 +135,7 @@ class _GroupSearchScreenState extends State<GroupSearchScreen> {
     return ListView.builder(
       itemCount: suggestionList.length,
       itemBuilder: ((context, index) {
-        User searchedUser = User(
+        Users searchedUser = Users(
             uid: suggestionList[index].uid,
             profilePhoto: suggestionList[index].profilePhoto,
             name: suggestionList[index].name,

@@ -83,7 +83,7 @@ class _LoginState extends State<Login> {
       isLoginPressed = true;
     });
 
-    _authenticationMethods.signIn().then((FirebaseUser user) {
+    _authenticationMethods.signInWithGoogle().then((User user) {
       if (user != null) {
         authenticateUser(user, token);
       } else {
@@ -92,7 +92,7 @@ class _LoginState extends State<Login> {
     });
   }
 
-  void authenticateUser(FirebaseUser user, String token) {
+  void authenticateUser(User user, String token) {
     _authenticationMethods.authenticateUser(user).then((isNewUser) {
       setState(() {
         isLoginPressed = false;

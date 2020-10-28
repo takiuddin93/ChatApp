@@ -4,7 +4,7 @@ import 'package:chatapp/provider/user_provider.dart';
 import 'package:chatapp/widgets/mainappbar.dart';
 import 'package:chatapp/utils/universal_variables.dart';
 import 'package:chatapp/screens/chatscreens/widgets/cached_image.dart';
-import 'package:chatapp/models/user.dart';
+import 'package:chatapp/models/users.dart';
 
 double itemHeight;
 double itemWidth;
@@ -39,14 +39,14 @@ class UserDetailsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final UserProvider userProvider = Provider.of<UserProvider>(context);
-    final User user = userProvider.getUser;
+    final Users users = userProvider.getUser;
 
     return Container(
       padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
       child: Row(
         children: [
           CachedImage(
-            user.profilePhoto,
+            users.profilePhoto,
             isRound: true,
             radius: 80,
           ),
@@ -55,7 +55,7 @@ class UserDetailsBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                user.name,
+                users.name,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
@@ -64,7 +64,7 @@ class UserDetailsBody extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Text(
-                user.email,
+                users.email,
                 style: TextStyle(
                   fontSize: 14,
                   color: UniversalVariables.subtextColor,
