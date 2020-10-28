@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:chatapp/constants/strings.dart';
 import 'package:chatapp/models/contact.dart';
-import 'package:chatapp/models/user.dart';
+import 'package:chatapp/models/users.dart';
 
 class ContactMethods {
   static final Firestore _firestore = Firestore.instance;
@@ -9,15 +9,12 @@ class ContactMethods {
   final CollectionReference _userCollection =
       _firestore.collection(USERS_COLLECTION);
 
-  Future<void> addContactToDb(User sender, User receiver) async {
+  Future<void> addContactToDb(Users sender, Users receiver) async {
     addToContacts(senderId: sender.uid, receiverId: receiver.uid);
   }
 
   DocumentReference getContactsDocument({String of, String forContact}) =>
-      _userCollection
-          .document(of)
-          .collection(CONTACTS_COLLECTION)
-          .document(forContact);
+      _userCollection.doc(of).collection(CONTACTS_COLLECTION).doc(forContact);
 
   addToContacts({String senderId, String receiverId}) async {
     Timestamp currentTime = Timestamp.now();
@@ -44,7 +41,7 @@ class ContactMethods {
       var receiverMap = receiverContact.toMap(receiverContact);
 
       await getContactsDocument(of: senderId, forContact: receiverId)
-          .setData(receiverMap);
+          .set(receiverMap);
     }
   }
 
@@ -66,12 +63,10 @@ class ContactMethods {
       var senderMap = senderContact.toMap(senderContact);
 
       await getContactsDocument(of: receiverId, forContact: senderId)
-          .setData(senderMap);
+          .set(senderMap);
     }
   }
 
-  Stream<QuerySnapshot> fetchContacts({String userId}) => _userCollection
-      .document(userId)
-      .collection(CONTACTS_COLLECTION)
-      .snapshots();
+  Stream<QuerySnapshot> fetchContacts({String userId}) =>
+      _userCollection.doc(userId).collection(CONTACTS_COLLECTION).snapshots();
 }

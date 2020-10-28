@@ -3,28 +3,29 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:chatapp/constants/strings.dart';
 import 'package:chatapp/models/group.dart';
-import 'package:chatapp/models/user.dart';
+import 'package:chatapp/models/users.dart';
 
 class GroupMethods {
-  static final Firestore _firestore = Firestore.instance;
+  static final FirebaseFirestore _firebaseFirestore =
+      FirebaseFirestore.instance;
 
   final CollectionReference _messageCollection =
-      _firestore.collection(MESSAGES_COLLECTION);
+      _firebaseFirestore.collection(MESSAGES_COLLECTION);
 
   final CollectionReference _userCollection =
-      _firestore.collection(USERS_COLLECTION);
+      _firebaseFirestore.collection(USERS_COLLECTION);
   final CollectionReference _groupCollection =
-      _firestore.collection(GROUPS_COLLECTION);
+      _firebaseFirestore.collection(GROUPS_COLLECTION);
 
-  Future<void> addGroupToDb(User sender, User receiver) async {
+  Future<void> addGroupToDb(Users sender, Users receiver) async {
     addToGroups(senderId: sender.uid, receiverId: receiver.uid);
   }
 
   DocumentReference getGroupsDocument({String of, String forContact}) =>
       _userCollection
-          .document(of)
+          .doc(of)
           .collection(GROUPS_COLLECTION)
-          .document("group_" + Random().nextInt(1000).toString());
+          .doc("group_" + Random().nextInt(1000).toString());
 
   addToGroups({String senderId, String receiverId}) async {
     Timestamp currentTime = Timestamp.now();
@@ -48,7 +49,7 @@ class GroupMethods {
       var receiverMap = receiverGroup.toMap(receiverGroup);
 
       await getGroupsDocument(of: senderId, forContact: receiverId)
-          .setData(receiverMap);
+          .set(receiverMap);
     }
   }
 
@@ -70,21 +71,19 @@ class GroupMethods {
       var senderMap = senderGroup.toMap(senderGroup);
 
       await getGroupsDocument(of: receiverId, forContact: senderId)
-          .setData(senderMap);
+          .set(senderMap);
     }
   }
 
-  Stream<QuerySnapshot> fetchGroups({String userId}) => _userCollection
-      .document(userId)
-      .collection(GROUPS_COLLECTION)
-      .snapshots();
+  Stream<QuerySnapshot> fetchGroups({String userId}) =>
+      _userCollection.doc(userId).collection(GROUPS_COLLECTION).snapshots();
 
   Stream<QuerySnapshot> fetchLastMessageBetween({
     @required String senderId,
     @required String receiverId,
   }) =>
       _messageCollection
-          .document(senderId)
+          .doc(senderId)
           .collection(receiverId)
           .orderBy("timestamp")
           .snapshots();

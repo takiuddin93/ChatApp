@@ -1,99 +1,115 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:chatapp/constants/strings.dart';
 import 'package:chatapp/enum/user_state.dart';
-import 'package:chatapp/models/user.dart';
+import 'package:chatapp/models/users.dart';
 import 'package:chatapp/utils/utilities.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthenticationMethods {
-  static final Firestore _firestore = Firestore.instance;
+  static final FirebaseFirestore _firebaseFirestore =
+      FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  GoogleSignIn _googleSignIn = GoogleSignIn();
-  static final Firestore firestore = Firestore.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  static final CollectionReference _userCollection =
-      _firestore.collection(USERS_COLLECTION);
+  final CollectionReference _collectionReference =
+      _firebaseFirestore.collection(USERS_COLLECTION);
 
-  Future<FirebaseUser> getCurrentUser() async {
-    FirebaseUser currentUser;
-    currentUser = await _auth.currentUser();
+  // Get Current User
+  Future<User> getCurrentUser() async {
+    User currentUser;
+    currentUser = _auth.currentUser;
     return currentUser;
   }
 
-  Future<User> getUserDetails() async {
-    FirebaseUser currentUser = await getCurrentUser();
+  // Get All User Details
+  Future<Users> getUserDetails() async {
+    User currentUser = await getCurrentUser();
 
     DocumentSnapshot documentSnapshot =
-        await _userCollection.document(currentUser.uid).get();
+        await _collectionReference.doc(currentUser.uid).get();
 
-    return User.fromMap(documentSnapshot.data);
+    return Users.fromMap(documentSnapshot.data());
   }
 
-  Future<User> getUserDetailsById(id) async {
+  // Get User Details by ID
+  Future<Users> getUserDetailsById(id) async {
     try {
       DocumentSnapshot documentSnapshot =
-          await _userCollection.document(id).get();
-      return User.fromMap(documentSnapshot.data);
+          await _collectionReference.doc(id).get();
+      return Users.fromMap(documentSnapshot.data());
     } catch (e) {
       print(e);
       return null;
     }
   }
 
-  Future<FirebaseUser> signIn() async {
-    GoogleSignInAccount _signInAccount = await _googleSignIn.signIn();
-    GoogleSignInAuthentication _signInAuthentication =
-        await _signInAccount.authentication;
+  // Sign In with Google
+  Future<User> signInWithGoogle() async {
+    await Firebase.initializeApp();
 
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
-        accessToken: _signInAuthentication.accessToken,
-        idToken: _signInAuthentication.idToken);
+    final GoogleSignInAccount googleSignInAccount =
+        await _googleSignIn.signIn();
+    final GoogleSignInAuthentication googleSignInAuthentication =
+        await googleSignInAccount.authentication;
 
-    AuthResult result = await _auth.signInWithCredential(credential);
-    FirebaseUser user = result.user;
+    final AuthCredential authCredential = GoogleAuthProvider.credential(
+      accessToken: googleSignInAuthentication.accessToken,
+      idToken: googleSignInAuthentication.idToken,
+    );
+
+    final UserCredential userCredential =
+        await _auth.signInWithCredential(authCredential);
+
+    final User user = userCredential.user;
     return user;
   }
 
-  Future<bool> authenticateUser(FirebaseUser user) async {
-    QuerySnapshot result = await firestore
+  // Authenticate User
+  // ignore: missing_return
+  Future<bool> authenticateUser(User user) async {
+    Stream<QuerySnapshot> result = _firebaseFirestore
         .collection(USERS_COLLECTION)
         .where(EMAIL_FIELD, isEqualTo: user.email)
-        .getDocuments();
+        .snapshots();
 
-    final List<DocumentSnapshot> docs = result.documents;
-
-    //if user is registered then length of list > 0 or else less than 0
-    return docs.length == 0 ? true : false;
+    // final List<DocumentSnapshot> docs = result.docs;
+    await for (var data in result) {
+      //if user is registered then length of list > 0 or else less than 0
+      return data.docs.length == 0 ? true : false;
+    }
   }
 
-  Future<void> addDataToDb(FirebaseUser currentUser, String token) async {
+  // Add Users to Database
+  Future<void> addDataToDb(User currentUser, String token) async {
     String username = Utils.getUsername(currentUser.email);
 
-    User user = User(
+    Users user = Users(
       uid: currentUser.uid,
       email: currentUser.email,
       name: currentUser.displayName,
-      profilePhoto: currentUser.photoUrl,
+      profilePhoto: currentUser.photoURL,
       firebaseToken: token,
       username: username,
     );
 
-    firestore
+    _firebaseFirestore
         .collection(USERS_COLLECTION)
-        .document(currentUser.uid)
-        .setData(user.toMap(user));
+        .doc(currentUser.uid)
+        .set(user.toMap(user));
   }
 
-  Future<List<User>> fetchAllUsers(FirebaseUser currentUser) async {
-    List<User> userList = List<User>();
+  // Fetch All Users
+  Future<List<Users>> fetchAllUsers(User currentUser) async {
+    List<Users> userList = List<Users>();
 
     QuerySnapshot querySnapshot =
-        await firestore.collection(USERS_COLLECTION).getDocuments();
-    for (var i = 0; i < querySnapshot.documents.length; i++) {
-      if (querySnapshot.documents[i].documentID != currentUser.uid) {
-        userList.add(User.fromMap(querySnapshot.documents[i].data));
+        await _firebaseFirestore.collection(USERS_COLLECTION).get();
+    for (var i = 0; i < querySnapshot.docs.length; i++) {
+      if (querySnapshot.docs[i].id != currentUser.uid) {
+        userList.add(Users.fromMap(querySnapshot.docs[i].data()));
       }
     }
     return userList;
@@ -113,11 +129,11 @@ class AuthenticationMethods {
   void setUserState({@required String userId, @required UserState userState}) {
     int stateNum = Utils.stateToNum(userState);
 
-    _userCollection.document(userId).updateData({
+    _collectionReference.doc(userId).update({
       "state": stateNum,
     });
   }
 
   Stream<DocumentSnapshot> getUserStream({@required String uid}) =>
-      _userCollection.document(uid).snapshots();
+      _collectionReference.doc(uid).snapshots();
 }

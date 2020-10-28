@@ -2,18 +2,19 @@ import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/widgets.dart';
-import 'package:chatapp/models/user.dart';
+import 'package:chatapp/models/users.dart';
 import 'package:chatapp/provider/image_upload_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:chatapp/resources/chat_methods.dart';
 
 class StorageMethods {
-  static final Firestore firestore = Firestore.instance;
+  static final FirebaseFirestore _firebaseFirestore =
+      FirebaseFirestore.instance;
 
   StorageReference _storageReference;
 
-  //user class
-  User user = User();
+  //users class
+  Users users = Users();
 
   Future<String> uploadImageToStorage(File imageFile) async {
     // mention try catch later on
