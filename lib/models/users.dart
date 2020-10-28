@@ -1,4 +1,4 @@
-class User {
+class Users {
   String uid;
   String name;
   String email;
@@ -8,7 +8,7 @@ class User {
   String profilePhoto;
   String firebaseToken;
 
-  User({
+  Users({
     this.uid,
     this.name,
     this.email,
@@ -19,21 +19,21 @@ class User {
     this.firebaseToken,
   });
 
-  Map toMap(User user) {
+  Map toMap(Users users) {
     var data = Map<String, dynamic>();
-    data['uid'] = user.uid;
-    data['name'] = user.name;
-    data['email'] = user.email;
-    data['username'] = user.username;
-    data["status"] = user.status;
-    data["state"] = user.state;
-    data["profile_photo"] = user.profilePhoto;
-    data["firebaseToken"] = user.firebaseToken;
+    data['uid'] = users.uid;
+    data['name'] = users.name;
+    data['email'] = users.email;
+    data['username'] = users.username;
+    data["status"] = users.status;
+    data["state"] = users.state;
+    data["profile_photo"] = users.profilePhoto;
+    data["firebaseToken"] = users.firebaseToken;
     return data;
   }
 
   // Named constructor
-  User.fromMap(Map<String, dynamic> mapData) {
+  Users.fromMap(Map<String, dynamic> mapData) {
     this.uid = mapData['uid'];
     this.name = mapData['name'];
     this.email = mapData['email'];
