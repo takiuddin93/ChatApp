@@ -1,16 +1,16 @@
 import 'package:flutter/widgets.dart';
-import 'package:chatapp/models/user.dart';
+import 'package:chatapp/models/users.dart';
 import 'package:chatapp/resources/authentication_methods.dart';
 
 class UserProvider with ChangeNotifier {
-  User _user;
+  Users _users;
   AuthenticationMethods _authenticationMethods = AuthenticationMethods();
 
-  User get getUser => _user;
+  Users get getUser => _users;
 
   Future<void> refreshUser() async {
-    User user = await _authenticationMethods.getUserDetails();
-    _user = user;
+    Users users = await _authenticationMethods.getUserDetails();
+    _users = users;
     notifyListeners();
   }
 }
