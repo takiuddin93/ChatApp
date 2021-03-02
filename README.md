@@ -57,7 +57,7 @@ samples, guidance on mobile development, and a full API reference.
 <p>
 MIT License
 
-Copyright (c) 2020 Taki Uddin
+Copyright (c) 2021 Taki Uddin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
